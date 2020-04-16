@@ -20,10 +20,12 @@ def index(request):
 def site(request, site_id):
     try:
         site = Site.objects.get(pk=site_id)
+        buildings = site.building_set.order_by('name')
     except Site.DoesNotExist:
         raise Http404("Site not found")
 
-    return render(request, 'loc/site.html', {'site': site})
+    return render(request, 'loc/site.html', {'site': site, 'buildings': buildings})
+
 
 def building(request, building_id):
     try:
