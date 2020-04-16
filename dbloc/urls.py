@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('dbloc/', include('dblocapp.urls')),
+    path('', include('loc.urls')),
     path('admin/', admin.site.urls),
 ]

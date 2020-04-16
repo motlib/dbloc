@@ -1,6 +1,8 @@
-{% extends 'dblocapp/base.html' %}
+{% extends 'loc/base.html' %}
 
 {% block content %}
+
+<p><a href="{% url 'index' %}">Site Index</a></p>
 
 <p>Site: {{ site.name }}</p>
 
