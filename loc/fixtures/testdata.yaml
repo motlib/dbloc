@@ -1,0 +1,28 @@
+- model: loc.Site
+  pk: 1
+  fields:
+    name: KOASIA Fantai 3
+
+- model: loc.Building
+  pk: 1
+  fields:
+    site: 1
+    name: Canteen
+
+- model: loc.Building
+  pk: 2
+  fields:
+    site: 1
+    name: Production
+
+- model: loc.Building
+  pk: 3
+  fields:
+    site: 1
+    name: Office
+
+- model: loc.Floor
+  pk: 1
+  fields:
+    building: 3
+    level: 1

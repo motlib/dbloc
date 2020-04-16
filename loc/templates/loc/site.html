@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<p><a href="{% url 'index' %}">Site Index</a></p>
+<p><a href="{% url 'loc:index' %}">Site Index</a></p>
 
 <p>Site: {{ site.name }}</p>
 
@@ -10,7 +10,7 @@
 
 <ul>
   {% for building in site.building_set.all %}
-  <li><a href="{% url 'building' building.id %}">{{ building.name }}</a></li>
+  <li><a href="{% url 'loc:building' building.id %}">{{ building.name }}</a></li>
   {% endfor %}
 </ul>
 

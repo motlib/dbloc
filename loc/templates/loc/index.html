@@ -6,7 +6,7 @@
 <ul>
   {% for site in sites %}
   <li>
-    <a href="{% url 'site' site.id %}">
+    <a href="{% url 'loc:site' site.id %}">
       {{ site.name }}
     </a>
   </li>
