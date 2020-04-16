@@ -1,0 +1,10 @@
+{% extends 'dblocapp/base.html' %}
+
+{% block content %}
+
+<p>
+  Building {{ building.name }} of site
+  <a href="{% url 'site' building.site.id %}">{{ building.site.name }}</a>.
+</p>
+
+{% endblock %}

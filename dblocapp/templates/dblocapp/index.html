@@ -1,0 +1,18 @@
+{% extends 'dblocapp/base.html' %}
+
+{% block content %}
+
+{% if sites %}
+<ul>
+  {% for site in sites %}
+  <li>
+    <a href="{% url 'site' site.id %}">
+      {{ site.name }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No sites are available.</p>
+{% endif %}
+{% endblock %}
