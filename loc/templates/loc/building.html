@@ -2,8 +2,6 @@
 
 {% block content %}
 
-<p><a href="{% url 'loc:index' %}">Site Index</a></p>
-
 <p>
   Building {{ building.name }} of site
   <a href="{% url 'loc:site' building.site.id %}">{{ building.site.name }}</a>.

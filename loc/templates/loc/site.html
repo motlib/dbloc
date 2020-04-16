@@ -2,14 +2,10 @@
 
 {% block content %}
 
-<p><a href="{% url 'loc:index' %}">Site Index</a></p>
-
-<p>Site: {{ site.name }}</p>
-
-<p>Buildings:</p>
+<p>There are {{ buildings|length }} buildings on the {{ site.name }} site:</p>
 
 <ul>
-  {% for building in site.building_set.all %}
+  {% for building in buildings %}
   <li><a href="{% url 'loc:building' building.id %}">{{ building.name }}</a></li>
   {% endfor %}
 </ul>
