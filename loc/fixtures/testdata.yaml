@@ -25,4 +25,4 @@
   pk: 1
   fields:
     building: 3
-    level: 1
+    levels: 1
