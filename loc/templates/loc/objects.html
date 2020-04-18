@@ -1,0 +1,7 @@
+{% macro building_link(b) -%}
+<span class="building"><a href="{{ url('loc:building', args=[b.id]) }}">{{ b }}</a></span>
+{%- endmacro %}
+
+{% macro floor_link(f) -%}
+<span class="building"><a href="{{ url('loc:floor', args=[f.id]) }}">{{ f }}</a></span>
+{%- endmacro %}

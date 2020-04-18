@@ -6,7 +6,18 @@
 
 <ul>
   {% for building in buildings %}
-  <li><a href="{% url 'loc:building' building.id %}">{{ building.name }}</a></li>
+  <li>
+    <a href="{{ url('loc:building', args=[building.id]) }}">{{ building.name }}</a>
+
+    {%if building.floors %}
+
+    {% for floor in building.floors %}
+    <a href="{{ url('loc:floor', args=[floor.id]) }}">{{ floor }}</a>
+    {% endfor %}
+    {% else %}
+    (no floors configured)
+    {% endif %}
+  </li>
   {% endfor %}
 </ul>
 

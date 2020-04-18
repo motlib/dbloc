@@ -1,18 +1,17 @@
-{% load static %}
 <html>
   <head>
-    <title>Django Building Locator</title>
+    <title>Building Locator</title>
     <link
       rel="stylesheet"
-      href="{% static "loc/style.css" %}" >
+      href="{{ static('loc/style.css') }}" >
   </head>
   <body>
-    <h1>Django Building Locator</h1>
+    <h1>Building Locator</h1>
 
     <p>
       Menu:
-      <a href="{% url 'loc:index' %}">Site Index</a>
-      <a href="{% url 'admin:index' %}">Administration</a>
+      <a href="{{ url('loc:index') }}">Site Index</a>
+      <a href="{{ url('admin:index') }}">Administration</a>
     </p>
 
     {% block content %}{% endblock %}

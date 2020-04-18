@@ -4,7 +4,18 @@
 
 <p>
   Building {{ building.name }} of site
-  <a href="{% url 'loc:site' building.site.id %}">{{ building.site.name }}</a>.
+  <a href="{{ url('loc:site', args=[building.site.id]) }}">{{ building.site.name }}</a>.
+</p>
+
+<p>
+  {%if building.floors %}
+
+  {% for floor in building.floors %}
+  <a href="{{ url('loc:floor', args=[floor.id]) }}">{{ floor }}</a>
+  {% endfor %}
+  {% else %}
+  (no floors configured)
+  {% endif %}
 </p>
 
 {% endblock %}

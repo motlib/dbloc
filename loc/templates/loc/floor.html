@@ -1,0 +1,23 @@
+{% extends 'loc/base.html' %}
+{% import 'loc/objects.html' as obj %}
+
+{% block content %}
+
+<p>
+  Floor {{ floor.name }} (level {{floor.level}} of {{ obj.building_link(building) }}):
+</p>
+
+
+<p>{% if floor.lower_floor %}Down: {{ obj.floor_link(floor.lower_floor) }}{% endif %}</p>
+<p>{% if floor.upper_floor %}Up: {{ obj.floor_link(floor.upper_floor) }}{% endif %}</p>
+
+<p>
+  {% if floor.image %}
+  <img src="{{ floor.image.url }}" />
+  {% else %}
+  No image stored.
+  {% endif %}
+</p>
+
+
+{% endblock %}
