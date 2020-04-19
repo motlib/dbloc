@@ -1,21 +1,14 @@
 {% extends 'loc/base.html' %}
+{% import 'loc/objects.html' as o %}
 
 {% block content %}
 
 <p>
-  Building {{ building.name }} of site
-  <a href="{{ url('loc:site', args=[building.site.id]) }}">{{ building.site.name }}</a>.
-</p>
-
-<p>
-  {%if building.floors %}
-
   {% for floor in building.floors %}
-  <a href="{{ url('loc:floor', args=[floor.id]) }}">{{ floor }}</a>
-  {% endfor %}
+  {{ o.floor_link(floor) }}
   {% else %}
   (no floors configured)
-  {% endif %}
+  {% endfor %}
 </p>
 
 {% endblock %}

@@ -37,7 +37,7 @@ def building(request, building_id):
         raise Http404("Floor not found")
 
     return render(request, 'loc/building.html', {
-        'floor': floor,
+        'floors': floors,
         'building': building,
         'site': site,
     })

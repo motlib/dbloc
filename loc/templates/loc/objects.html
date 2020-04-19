@@ -7,9 +7,8 @@
 {%- endmacro %}
 
 {% macro floor_link(f) -%}
-<span class="building"><a href="{{ url('loc:floor', args=[f.id]) }}">{{ f }}</a></span>
+<span class="floor"><a href="{{ url('loc:floor', args=[f.id]) }}">{{ f }}</a></span>
 {%- endmacro %}
-
 
 
 {# breadcrumb navigation #}

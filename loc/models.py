@@ -58,4 +58,8 @@ class Floor(models.Model):
         ]
 
     def __str__(self):
-        return '{f.name} ({f.level})'.format(f=self)
+        if self.name:
+            return self.name
+        else:
+            return str(self.level)
+        #return '{f.name} ({f.level})'.format(f=self)
