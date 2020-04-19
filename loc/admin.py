@@ -34,7 +34,7 @@ class FloorAdmin(admin.ModelAdmin):
 
 class BuildingAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['name', 'site']}),
+        (None, {'fields': ['name', 'site', 'address', 'url']}),
     ]
     inlines = [FloorInline, TeleportBuildingInline]
 

@@ -9,13 +9,20 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 
 
-class Site(models.Model):
+class AddressObject(models.Model):
+    address = models.TextField(default='', max_length=1000)
+    url = models.CharField(default='', max_length=1000)
+
+    class Meta:
+        abstract = True
+
+class Site(AddressObject):
     name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
 
-class Building(models.Model):
+class Building(AddressObject):
     name = models.CharField(max_length=200)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
