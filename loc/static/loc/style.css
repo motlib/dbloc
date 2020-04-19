@@ -6,3 +6,18 @@ body {
 h1 {
     font-size: 1.2rem;
 }
+
+
+#nav_row {
+    font-size: small;
+    background-color: lightgray;
+    padding: 0.3rem;
+}
+
+#nav_row #nav_loc {
+    display: inline-block;
+}
+
+#nav_row #nav_admin {
+    float: right;
+}

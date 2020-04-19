@@ -1,4 +1,4 @@
-<html>
+{% import 'loc/objects.html' as o with context %}<html>
   <head>
     <title>Building Locator</title>
     <link
@@ -8,11 +8,15 @@
   <body>
     <h1>Building Locator</h1>
 
-    <p>
-      Menu:
-      <a href="{{ url('loc:index') }}">Site Index</a>
-      <a href="{{ url('admin:index') }}">Administration</a>
-    </p>
+    <div id="nav_row" style="width: 100%">
+      <div id="nav_loc">
+        {{ o.breadcrumb() }}
+      </div>
+
+      <div id="nav_admin">
+        <a href="{{ url('admin:index') }}">Administration</a>
+      </div>
+    </div>
 
     {% block content %}{% endblock %}
   </body>
