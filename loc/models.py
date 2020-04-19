@@ -62,4 +62,34 @@ class Floor(models.Model):
             return self.name
         else:
             return str(self.level)
-        #return '{f.name} ({f.level})'.format(f=self)
+
+
+class Teleport(models.Model):
+    x = models.FloatField(default=0.0)
+    y = models.FloatField(default=0.0)
+
+    text = models.CharField(default='', max_length=200)
+
+    src_building = models.ForeignKey(
+        Building,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='teleports')
+    src_floor = models.ForeignKey(
+        Floor,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name='teleports')
+
+    dest_building = models.ForeignKey(
+        Building,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+')
+    dest_floor = models.ForeignKey(
+        Floor,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+')

@@ -1,5 +1,6 @@
 {% extends 'loc/base.html' %}
 {% import 'loc/objects.html' as o %}
+{% import 'loc/plan.html' as f %}
 
 {% block content %}
 
@@ -11,13 +12,5 @@
   {% endfor %}
 </p>
 
-<div id="image">
-  {% if building.image %}
-  <img src="{{ building.image.url }}" />
-  {% else %}
-  No image stored.
-  {% endif %}
-</p>
-
-
+{{ f.plan(building, teleports) }}
 {% endblock %}

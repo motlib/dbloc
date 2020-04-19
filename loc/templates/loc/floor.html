@@ -1,5 +1,6 @@
 {% extends 'loc/base.html' %}
 {% import 'loc/objects.html' as obj %}
+{% import 'loc/plan.html' as f %}
 
 {% block content %}
 
@@ -9,17 +10,14 @@
 
 <div id="building_nav">
   <p>{% if floor.lower_floor %}Down: {{ obj.floor_link(floor.lower_floor) }}{% endif %}</p>
-  <p>{% if floor.upper_floor %}Up: {{ obj.floor_link(floor.upper_floor) }}{% endif
-  %}</p>
-<div>
-
-<div id="image">
-  {% if floor.image %}
-  <img src="{{ floor.image.url }}" />
-  {% else %}
-  No image stored.
-  {% endif %}
+  <p>
+    {% if floor.upper_floor %}
+    Up: {{ obj.floor_link(floor.upper_floor) }}
+    {% endif %}
+  </p>
 </div>
+
+{{ f.plan(floor, teleports) }}
 
 
 {% endblock %}

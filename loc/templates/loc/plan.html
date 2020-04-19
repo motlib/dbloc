@@ -1,0 +1,56 @@
+{% macro plan_svg(plan_obj, teleports) %}
+<svg id="plan" version="1.1"
+     width="{{ plan_obj.image.width }}px" height="{{ plan_obj.image.height }}px"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <image href="{{ plan_obj.image.url }}"
+         x="0" y="0"
+         width="{{ plan_obj.image.width }}" height="{{ plan_obj.image.height }}" />
+
+  {% for teleport in teleports %}
+
+  {% if teleport.dest_floor %}
+  {% set view='loc:floor' %}
+  {% set id=teleport.dest_floor.id %}
+  {% endif %}
+  {% if teleport.dest_building %}
+  {% set view='loc:building' %}
+  {% set id=teleport.dest_building.id %}
+  {% endif %}
+
+  <a xlink:href="{{ url(view, args=[id]) }}">
+    <text
+        x="{{ teleport.x * plan_obj.image.width }}"
+        y="{{ teleport.y * plan_obj.image.height }}"
+        class="teleport_link"
+        >{{ teleport.text }}</text>
+  </a>
+  {% endfor %}
+</svg>
+{% endmacro %}
+
+{% macro plan(plan_obj, teleports) %}
+<div id="image">
+  {% if plan_obj.image %}
+  {{ plan_svg(plan_obj, teleports) }}
+  {% else %}
+  No image stored.
+  {% endif %}
+</div>
+
+<div id="coords">-</div>
+
+<script type="text/javascript">
+  el_plan = document.getElementById('plan')
+  el_coords = document.getElementById('coords')
+  plan_rect = el_plan.getBoundingClientRect()
+
+  el_plan.addEventListener('mousemove', e => {
+      x = ((e.offsetX) / el_plan.width.baseVal.value).toFixed(2)
+      y = ((e.offsetY) / el_plan.height.baseVal.value).toFixed(2)
+
+      el_coords.innerText = 'X=' + x + '  Y=' + y
+  });
+</script>
+{% endmacro %}

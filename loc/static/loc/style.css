@@ -26,3 +26,19 @@ h1 {
     padding: 0.2rem;
     border: 1px solid lightgray;
 }
+
+.teleport_link {
+    font-size:10px;
+    fill: red;
+    dominant-baseline: middle;
+    text-anchor: middle;
+}
+
+.teleport_link:hover {
+    font-weight: bold;
+}
+
+
+#plan {
+    border: 1px solid lightgray;
+}

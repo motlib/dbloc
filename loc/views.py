@@ -40,6 +40,7 @@ def building(request, building_id):
         'floors': floors,
         'building': building,
         'site': site,
+        'teleports': building.teleports.all(),
     })
 
 
@@ -53,6 +54,7 @@ def floor(request, floor_id):
 
     return render(request, 'loc/floor.html', {
         'floor': floor,
+        'teleports': floor.teleports.all(),
         'building': building,
         'site': building.site,
     })
