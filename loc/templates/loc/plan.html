@@ -53,4 +53,26 @@
       el_coords.innerText = 'X=' + x + '  Y=' + y
   });
 </script>
+
+<script src="{{ static('loc/scripts/svg-pan-zoom.js') }}"></script>
+
+<script>
+  // Don't use window.onLoad like this in production, because it can only
+  // listen to one function.
+  window.onload = function() {
+      // Expose to window namespase for testing purposes
+      svgPanZoom('#plan', {
+          zoomEnabled: true,
+          controlIconsEnabled: true,
+          fit: true,
+          center: true});
+
+      //document.getElementById('enable').addEventListener('click', function() {
+      //    window.zoomTiger.enableControlIcons();
+      //})
+      //document.getElementById('disable').addEventListener('click', function() {
+      //    window.zoomTiger.disableControlIcons();
+      //})
+  };
+</script>
 {% endmacro %}
