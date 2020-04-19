@@ -11,4 +11,13 @@
   {% endfor %}
 </p>
 
+<p>
+  {% if building.image %}
+  <img src="{{ building.image.url }}" />
+  {% else %}
+  No image stored.
+  {% endif %}
+</p>
+
+
 {% endblock %}
