@@ -31,13 +31,15 @@ def site(request, site_id):
 def building(request, building_id):
     try:
         building = Building.objects.get(pk=building_id)
+        site = building.site
         floors = building.floors
     except Building.DoesNotExist:
         raise Http404("Floor not found")
 
     return render(request, 'loc/building.html', {
         'floor': floor,
-        'building': building
+        'building': building,
+        'site': site,
     })
 
 
@@ -45,10 +47,12 @@ def floor(request, floor_id):
     try:
         floor = Floor.objects.get(pk=floor_id)
         building = floor.building
+        site = building.site
     except Floor.DoesNotExist:
         raise Http404("Floor not found")
 
     return render(request, 'loc/floor.html', {
         'floor': floor,
-        'building': building
+        'building': building,
+        'site': building.site,
     })
