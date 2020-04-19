@@ -21,3 +21,8 @@ h1 {
 #nav_row #nav_admin {
     float: right;
 }
+
+#image img {
+    padding: 0.2rem;
+    border: 1px solid lightgray;
+}
