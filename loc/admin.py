@@ -12,7 +12,7 @@ class FloorInline(admin.TabularInline):
 
 class BuildingAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['name']}),
+        (None, {'fields': ['name', 'site']}),
     ]
     inlines = [FloorInline]
 

@@ -19,6 +19,8 @@ class Building(models.Model):
     name = models.CharField(max_length=200)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
+    image = models.ImageField(null=True, blank=True)
+
     @property
     def floors(self):
         return self.floor_set.order_by('level')
@@ -33,9 +35,7 @@ class Floor(models.Model):
     level = models.IntegerField(default=0)
     name = models.CharField(default='', max_length=200)
 
-    image = models.ImageField(
-        null=True,
-        blank=True)
+    image = models.ImageField(null=True, blank=True)
 
     @property
     def lower_floor(self):
