@@ -1,6 +1,7 @@
 
 body {
     font-family: sans-serif;
+    font-size: 0.8rem;
 }
 
 h1 {
@@ -9,7 +10,7 @@ h1 {
 
 
 #nav_row {
-    font-size: small;
+    font-size: 0.8em;
     background-color: lightgray;
     padding: 0.3rem;
 }
@@ -41,4 +42,12 @@ h1 {
 
 #plan {
     border: 1px solid lightgray;
+}
+
+#meta .header {
+    font-weight: bold;
+}
+
+#meta .value {
+
 }

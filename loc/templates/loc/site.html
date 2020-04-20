@@ -1,5 +1,7 @@
 {% extends 'loc/base.html' %}
 
+{% import 'loc/macros/meta.html' as m %}
+
 {% block content %}
 
 <p>There are {{ buildings|length }} buildings on the {{ site.name }} site:</p>
@@ -21,5 +23,6 @@
   {% endfor %}
 </ul>
 
+{{ m.show_meta('site', site) }}
 
 {% endblock %}

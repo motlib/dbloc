@@ -1,6 +1,7 @@
 {% extends 'loc/base.html' %}
-{% import 'loc/objects.html' as o %}
-{% import 'loc/plan.html' as f %}
+{% import 'loc/macros/objects.html' as o %}
+{% import 'loc/macros/plan.html' as f %}
+{% import 'loc/macros/meta.html' as m %}
 
 {% block content %}
 
@@ -13,4 +14,6 @@
 </p>
 
 {{ f.plan(building, teleports) }}
+
+{{ m.show_meta('building', building) }}
 {% endblock %}

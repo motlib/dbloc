@@ -1,0 +1,14 @@
+{% macro show_meta(type, obj) %}
+<div id="meta">
+  <p>Metadata (<a href="{{ url('loc:' + type + '_edit_meta', args=[obj.id]) }}">edit<a>)
+
+  {% if obj.address %}
+  <p class="header">Address</p>
+  <pre class="value">{{ obj.address }}</pre>
+  {% endif %}
+  {% if obj.url %}
+  <p class="header">URL</p>
+  <p class value><a href="{{ obj.url }}">Link</a></p>
+  {% endif %}
+</div>
+{% endmacro %}
