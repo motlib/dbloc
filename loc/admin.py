@@ -43,6 +43,9 @@ class BuildingInline(admin.TabularInline):
     model = Building
     extra = 1
     show_change_link = True
+    fieldsets = [
+        (None, {'fields': ['name', 'image']}),
+    ]
 
 
 class SiteAdmin(admin.ModelAdmin):

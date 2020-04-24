@@ -17,33 +17,45 @@ class AddressObject(models.Model):
     class Meta:
         abstract = True
 
+
 class Site(AddressObject):
     name = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ('name',)
 
     def __str__(self):
         return self.name
 
+
 class Building(AddressObject):
     name = models.CharField(max_length=200)
+    image = models.ImageField(null=True, blank=True)
+
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
 
-    image = models.ImageField(null=True, blank=True)
+    class Meta:
+        ordering = ('name',)
 
     @property
     def floors(self):
         return self.floor_set.order_by('level')
-
 
     def __str__(self):
         return self.name
 
 
 class Floor(models.Model):
-    building = models.ForeignKey(Building, on_delete=models.CASCADE)
-    level = models.IntegerField(default=0)
     name = models.CharField(default='', max_length=200)
-
+    level = models.IntegerField(default=0)
     image = models.ImageField(null=True, blank=True)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('level',)
+        constraints = [
+            models.UniqueConstraint(fields=['building', 'level'], name='unique_level')
+        ]
 
     @property
     def lower_floor(self):
@@ -60,11 +72,6 @@ class Floor(models.Model):
             return None
 
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['building', 'level'], name='unique_level')
-        ]
-
     def __str__(self):
         if self.name:
             return self.name
@@ -75,9 +82,7 @@ class Floor(models.Model):
 class Teleport(models.Model):
     x = models.FloatField(default=0.0)
     y = models.FloatField(default=0.0)
-
     text = models.CharField(default='', max_length=200)
-
     src_building = models.ForeignKey(
         Building,
         null=True,
@@ -88,7 +93,6 @@ class Teleport(models.Model):
         null=True,
         on_delete=models.CASCADE,
         related_name='teleports')
-
     dest_building = models.ForeignKey(
         Building,
         blank=True,
@@ -101,3 +105,6 @@ class Teleport(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         related_name='+')
+
+    class Meta:
+        ordering = ('text', )
