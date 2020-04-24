@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.template import loader
+from django.contrib.auth.decorators import login_required
 
 from .models import Site, Building, Floor
 
@@ -9,72 +10,81 @@ from .forms import BuildingMetaForm, SiteMetaForm
 # Create your views here.
 
 def index(request):
+    '''Show the list of sites.'''
+
     sites = Site.objects.order_by('name')
-    template = loader.get_template('loc/index.html')
+
     context = {
         'sites': sites,
     }
 
-    return HttpResponse(template.render(context, request))
+    return render(request, 'loc/index.html', context)
 
 
 def site(request, pk):
-    try:
-        site = Site.objects.get(pk=pk)
-        buildings = site.building_set.order_by('name')
-    except Site.DoesNotExist:
-        raise Http404("Site not found")
+    site = get_object_or_404(Site, pk=pk)
 
-    return render(request, 'loc/site.html', {'site': site, 'buildings': buildings})
+    context = {
+        'site': site,
+        'buildings': site.building_set.order_by('name'),
+    }
+
+    return render(request, 'loc/site.html', context)
 
 
 def building(request, pk):
-    try:
-        building = Building.objects.get(pk=pk)
-        site = building.site
-        floors = building.floors
-    except Building.DoesNotExist:
-        raise Http404("Floor not found")
+    building = get_object_or_404(Building, pk=pk)
 
-    return render(request, 'loc/building.html', {
-        'floors': floors,
+    context = {
+        'floors': building.floors,
         'building': building,
-        'site': site,
+        'site': building.site,
         'teleports': building.teleports.all(),
-    })
+    }
+
+    return render(request, 'loc/building.html', context)
 
 
 def floor(request, pk):
-    try:
-        floor = Floor.objects.get(pk=pk)
-        building = floor.building
-        site = building.site
-    except Floor.DoesNotExist:
-        raise Http404("Floor not found")
+    floor = get_object_or_404(Floor, pk=pk)
 
     return render(request, 'loc/floor.html', {
         'floor': floor,
         'teleports': floor.teleports.all(),
-        'building': building,
-        'site': building.site,
+        'building': floor.building,
+        'site': floor.building.site,
     })
 
 
+@login_required
 def building_edit_meta(request, pk):
+    '''Edit the metadata of a building.'''
+
     building = get_object_or_404(Building, pk=pk)
 
     if request.method == "POST":
         form = BuildingMetaForm(request.POST, instance=building)
         if form.is_valid():
             form.save()
+
+            # return to the building view
             return redirect('loc:building', pk=building.id)
     else:
         form = BuildingMetaForm(instance=building)
 
-    return render(request, 'loc/edit_meta.html', {'building': building, 'site': building.site, 'form': form})
+    context = {
+        'building': building,
+        'site': building.site,
+        'form': form
+    }
+
+    return render(request, 'loc/edit_meta.html', context)
 
 
+@login_required
 def site_edit_meta(request, pk):
+    '''Edit the metadata of a site.'''
+
     site = get_object_or_404(Site, pk=pk)
 
     if request.method == "POST":
@@ -83,6 +93,11 @@ def site_edit_meta(request, pk):
             form.save()
             return redirect('loc:site', pk=site.id)
     else:
-        form = BuildingMetaForm(instance=site)
+        form = SiteMetaForm(instance=site)
 
-    return render(request, 'loc/edit_meta.html', {'site': site, 'form': form})
+    context = {
+        'site': site,
+        'form': form,
+    }
+
+    return render(request, 'loc/edit_meta.html', context)

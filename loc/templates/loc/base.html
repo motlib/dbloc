@@ -15,7 +15,14 @@
       </div>
 
       <div id="nav_admin">
+        {% if user.is_authenticated %}
+        {{ user.username }}
         <a href="{{ url('admin:index') }}">Administration</a>
+        <a href="{{ url('logout') }}">logout</a>
+        {% else %}
+        <a href="{{ url('login') }}">login</a>
+        {% endif %}
+
       </div>
     </div>
 

@@ -30,7 +30,7 @@
 </svg>
 {% endmacro %}
 
-{% macro plan(plan_obj, teleports) %}
+{% macro plan(plan_obj, teleports, with_zoom=True) %}
 <div id="image">
   {% if plan_obj.image %}
   {{ plan_svg(plan_obj, teleports) }}
@@ -39,12 +39,10 @@
   {% endif %}
 </div>
 
-<div id="coords">-</div>
-
 <script type="text/javascript">
   el_plan = document.getElementById('plan')
   el_coords = document.getElementById('coords')
-  plan_rect = el_plan.getBoundingClientRect()
+  //plan_rect = el_plan.getBoundingClientRect()
 
   el_plan.addEventListener('mousemove', e => {
       x = ((e.offsetX) / el_plan.width.baseVal.value).toFixed(2)
@@ -54,6 +52,7 @@
   });
 </script>
 
+{% if with_zoom %}
 <script src="{{ static('loc/scripts/svg-pan-zoom.js') }}"></script>
 
 <script>
@@ -66,13 +65,8 @@
           controlIconsEnabled: true,
           fit: true,
           center: true});
-
-      //document.getElementById('enable').addEventListener('click', function() {
-      //    window.zoomTiger.enableControlIcons();
-      //})
-      //document.getElementById('disable').addEventListener('click', function() {
-      //    window.zoomTiger.disableControlIcons();
-      //})
   };
 </script>
+{% endif %}
+
 {% endmacro %}

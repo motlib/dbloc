@@ -10,8 +10,9 @@ from django.core.exceptions import ValidationError
 
 
 class AddressObject(models.Model):
-    address = models.TextField(default='', max_length=1000)
-    url = models.CharField(default='', max_length=1000)
+    description = models.TextField(default='', max_length=2000, blank=True)
+    address = models.TextField(default='', max_length=1000, blank=True)
+    url = models.CharField(default='', max_length=1000, blank=True)
 
     class Meta:
         abstract = True

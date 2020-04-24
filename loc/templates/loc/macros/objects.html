@@ -16,7 +16,8 @@
 {% macro breadcrumb() %}
 <a href="{{ url('loc:index') }}">Sites</a>
 {% if site -%}
-{{ sep }} {{ site_link(site) }}
+{{ site }}
+{{ sep }} {# site_link(site) #}
 {%- endif %}
 {% if building -%}
 {{ sep }} {{ building_link(building) }}

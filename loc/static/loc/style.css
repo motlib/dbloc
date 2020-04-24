@@ -40,8 +40,17 @@ h1 {
 }
 
 
-#plan {
+#image {
     border: 1px solid lightgray;
+    display: inline-block;
+}
+
+#meta {
+    border: 1px solid lightgray;
+
+    display: inline-block;
+    padding: 1rem;
+    //float: left;
 }
 
 #meta .header {
@@ -50,4 +59,10 @@ h1 {
 
 #meta .value {
 
+}
+
+.form_table th {
+    font-size: small;
+    font-weight: bold;
+    vertical-align: top;
 }
