@@ -1,3 +1,63 @@
+/*
+ * Color palette: https://www.canva.com/colors/color-palettes/blooms-and-bows/
+ *
+ * Emerald Green #5f9834
+ * Chili Pepper #ff3d33
+ * Orchid #e3bee0
+ * Orange #fd8300
+ */
+
+input[type=submit] {
+    padding:5px 15px;
+    background: #5f9834;
+    border:0 none;
+    color: black;
+    border-radius: 5px;
+}
+
+input[type=text] {
+    padding:5px 15px;
+    background: white;
+    border: 0 none;
+    border-radius: 5px;
+    color: black;
+}
+
+#links {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#links span.link {
+    padding: 15px;
+}
+
+#search {
+    margin: 10px;
+}
+
+ul.planlist {
+    padding-left: 0;
+}
+
+ul.planlist li {
+    list-style-type: none;
+    padding: 15px;
+    margin: 15px;
+    display: inline;
+}
+
+ul.planlist li a {
+    padding: 15px;
+    padding-left: 15px;
+    margin: 15px;
+    border-left: 3pt solid #5f9834;
+}
+
+ul.planlist li a:hover {
+    background-color: #ccc;
+}
+
 
 body {
     font-family: sans-serif;
@@ -9,17 +69,16 @@ h1 {
 }
 
 
-#nav_row {
-    font-size: 0.8em;
+#header {
     background-color: lightgray;
     padding: 0.3rem;
 }
 
-#nav_row #nav_loc {
+#header #nav_loc {
     display: inline-block;
 }
 
-#nav_row #nav_admin {
+#header #nav_admin {
     float: right;
 }
 

@@ -1,21 +1,23 @@
 from django import forms
 
-from .models import Site, Building
+from .models import Plan, Teleport
 
 
-class MetadataMeta:
-    fields = ['description', 'address', 'url']
-    widgets = {
-        'address': forms.Textarea(attrs={'cols': 60, 'rows': 6}),
-        'description': forms.Textarea(attrs={'cols': 60, 'rows': 6})
-    }
+class PlanMetaForm(forms.ModelForm):
+    class Meta:
+        model = Plan
+        fields = ['description', 'address', 'url']
+        widgets = {
+            'address': forms.Textarea(attrs={'cols': 60, 'rows': 6}),
+            'description': forms.Textarea(attrs={'cols': 60, 'rows': 6})
+        }
 
 
-class SiteMetaForm(forms.ModelForm):
-    class Meta(MetadataMeta):
-        model = Site
+class PlanTeleportForm(forms.ModelForm):
+    class Meta:
+        model = Teleport
+        fields = ['x', 'y', 'text', 'dest']
 
 
-class BuildingMetaForm(forms.ModelForm):
-    class Meta(MetadataMeta):
-        model = Building
+class PlanSearchForm(forms.Form):
+    term = forms.CharField(max_length=200, label='')

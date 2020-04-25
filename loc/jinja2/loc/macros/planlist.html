@@ -1,0 +1,15 @@
+{% macro planlist(plans) %}
+{% if plans %}
+<ul class="planlist">
+  {% for plan in plans %}
+  <li>
+    <a href="{{ url('loc:plan', args=[plan.id]) }}">
+      {{ plan.name }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No plans available.</p>
+{% endif %}
+{% endmacro %}

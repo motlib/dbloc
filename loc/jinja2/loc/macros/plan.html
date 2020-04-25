@@ -10,16 +10,9 @@
 
   {% for teleport in teleports %}
 
-  {% if teleport.dest_floor %}
-  {% set view='loc:floor' %}
-  {% set id=teleport.dest_floor.id %}
-  {% endif %}
-  {% if teleport.dest_building %}
-  {% set view='loc:building' %}
-  {% set id=teleport.dest_building.id %}
-  {% endif %}
+  {% set tp_link=url('loc:plan', args=[teleport.dest.id]) %}
 
-  <a xlink:href="{{ url(view, args=[id]) }}">
+  <a xlink:href="{{ tp_link }}">
     <text
         x="{{ teleport.x * plan_obj.image.width }}"
         y="{{ teleport.y * plan_obj.image.height }}"
@@ -30,6 +23,7 @@
 </svg>
 {% endmacro %}
 
+
 {% macro plan(plan_obj, teleports, with_zoom=True) %}
 <div id="image">
   {% if plan_obj.image %}
@@ -39,18 +33,6 @@
   {% endif %}
 </div>
 
-<script type="text/javascript">
-  el_plan = document.getElementById('plan')
-  el_coords = document.getElementById('coords')
-  //plan_rect = el_plan.getBoundingClientRect()
-
-  el_plan.addEventListener('mousemove', e => {
-      x = ((e.offsetX) / el_plan.width.baseVal.value).toFixed(2)
-      y = ((e.offsetY) / el_plan.height.baseVal.value).toFixed(2)
-
-      el_coords.innerText = 'X=' + x + '  Y=' + y
-  });
-</script>
 
 {% if with_zoom %}
 <script src="{{ static('loc/scripts/svg-pan-zoom.js') }}"></script>

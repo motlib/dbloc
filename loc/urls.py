@@ -7,11 +7,8 @@ app_name = 'loc'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('site/view/<int:pk>/', views.site, name='site'),
-    path('site/edit_meta/<int:pk>/', views.site_edit_meta, name='site_edit_meta'),
-
-    path('building/view/<int:pk>/', views.building, name='building'),
-    path('building/edit_meta/<int:pk>/', views.building_edit_meta, name='building_edit_meta'),
-
-    path('floor/view/<int:pk>/', views.floor, name='floor'),
+    path('plan/view/<int:pk>/', views.plan, name='plan'),
+    path('plan/edit_meta/<int:pk>/', views.plan_edit_meta, name='plan_edit_meta'),
+    path('plan/<int:pk>/add_tp/', views.plan_add_teleport, name='plan_add_tp'),
+    path('search', views.search, name='search'),
 ]

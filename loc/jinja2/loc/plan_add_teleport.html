@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% import 'loc/macros/objects.html' as obj %}
+{% import 'loc/macros/plan.html' as f %}
+
+{% block title %}Add Teleport{% endblock %}
+
+{% block content %}
+
+<div id="building_nav">
+  <p>{% if plan.lower_floor %}Down: {{ obj.floor_link(plan.lower_floor) }}{% endif %}</p>
+  <p>
+    {% if plan.upper_floor %}
+    Up: {{ obj.floor_link(plan.upper_floor) }}
+    {% endif %}
+  </p>
+</div>
+
+{{ f.plan(plan, teleports, with_zoom=False) }}
+
+<form method="post">
+  {{ csrf_input }}
+
+  <table>
+    {{ form.as_table() }}
+  </table>
+
+  <input type="Submit" />
+</form>
+
+<script type="text/javascript">
+  el_plan = document.getElementById('plan')
+  el_x = document.getElementById('id_x')
+  el_y = document.getElementById('id_y')
+
+  el_plan.addEventListener('dblclick', e => {
+      x = ((e.offsetX) / el_plan.width.baseVal.value).toFixed(2)
+      y = ((e.offsetY) / el_plan.height.baseVal.value).toFixed(2)
+
+      el_x.value = x
+      el_y.value = y
+      //el_coords.innerText = 'X=' + x + '  Y=' + y
+  });
+</script>
+
+
+{% endblock %}

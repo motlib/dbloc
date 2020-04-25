@@ -1,24 +1,24 @@
-- model: loc.Site
+- model: loc.Plan
   pk: 1
   fields:
     name: Fertighauspark Wuppertal
 
-- model: loc.Building
-  pk: 1
+- model: loc.Plan
+  pk: 2
   fields:
-    site: 1
+    parent: 1
     name: Fingerhaus Neo 312
 
-- model: loc.Floor
-  pk: 1
+- model: loc.Plan
+  pk: 3
   fields:
-    building: 1
+    parent: 2
     name: Erdgeschoss
     level: 0
 
-- model: loc.Floor
-  pk: 2
+- model: loc.Plan
+  pk: 4
   fields:
-    building: 1
+    parent: 2
     name: Obergeschoss
     level: 1

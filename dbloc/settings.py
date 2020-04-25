@@ -59,11 +59,10 @@ ROOT_URLCONF = 'dbloc.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': [os.path.join(BASE_DIR, 'loc/templates')],
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'environment': 'dbloc.jinja2.environment',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -73,11 +72,17 @@ TEMPLATES = [
         },
     },
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': [],
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'dbloc/jinja2'),
+        ],
+        #'DIRS': [
+        #    os.path.join(BASE_DIR, 'dbloc/templates'),
+        #    os.path.join(BASE_DIR, 'loc/templates'),
+        #],
         'APP_DIRS': True,
         'OPTIONS': {
+            'environment': 'dbloc.jinja2.environment',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

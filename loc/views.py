@@ -3,101 +3,95 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.decorators import login_required
 
-from .models import Site, Building, Floor
+from .models import Plan
 
-from .forms import BuildingMetaForm, SiteMetaForm
+from .forms import PlanMetaForm, PlanTeleportForm, PlanSearchForm
 
 # Create your views here.
 
 def index(request):
     '''Show the list of sites.'''
 
-    sites = Site.objects.order_by('name')
+    plans = Plan.objects.filter(parent__isnull=True)
 
     context = {
-        'sites': sites,
+        'plans': plans,
     }
 
     return render(request, 'loc/index.html', context)
 
 
-def site(request, pk):
-    site = get_object_or_404(Site, pk=pk)
+def plan(request, pk):
+    plan = get_object_or_404(Plan, pk=pk)
 
     context = {
-        'site': site,
-        'buildings': site.building_set.order_by('name'),
+        'plan': plan,
+        'parent': plan.parent,
+        'sub_plans': plan.plan_set.order_by('name'),
+        'teleports': plan.teleports.all(),
     }
 
-    return render(request, 'loc/site.html', context)
-
-
-def building(request, pk):
-    building = get_object_or_404(Building, pk=pk)
-
-    context = {
-        'floors': building.floors,
-        'building': building,
-        'site': building.site,
-        'teleports': building.teleports.all(),
-    }
-
-    return render(request, 'loc/building.html', context)
-
-
-def floor(request, pk):
-    floor = get_object_or_404(Floor, pk=pk)
-
-    return render(request, 'loc/floor.html', {
-        'floor': floor,
-        'teleports': floor.teleports.all(),
-        'building': floor.building,
-        'site': floor.building.site,
-    })
+    return render(request, 'loc/plan.html', context)
 
 
 @login_required
-def building_edit_meta(request, pk):
-    '''Edit the metadata of a building.'''
+def plan_edit_meta(request, pk):
+    '''Edit the metadata of a plan.'''
 
-    building = get_object_or_404(Building, pk=pk)
+    plan = get_object_or_404(Plan, pk=pk)
 
     if request.method == "POST":
-        form = BuildingMetaForm(request.POST, instance=building)
+        form = PlanMetaForm(request.POST, instance=plan)
         if form.is_valid():
             form.save()
 
             # return to the building view
-            return redirect('loc:building', pk=building.id)
+            return redirect('loc:plan', pk=plan.id)
     else:
-        form = BuildingMetaForm(instance=building)
+        form = PlanMetaForm(instance=plan)
 
     context = {
-        'building': building,
-        'site': building.site,
+        'plan': plan,
         'form': form
     }
 
     return render(request, 'loc/edit_meta.html', context)
 
-
 @login_required
-def site_edit_meta(request, pk):
-    '''Edit the metadata of a site.'''
+def plan_add_teleport(request, pk):
+    plan = get_object_or_404(Plan, pk=pk)
 
-    site = get_object_or_404(Site, pk=pk)
-
-    if request.method == "POST":
-        form = SiteMetaForm(request.POST, instance=site)
+    if request.method == 'POST':
+        form = PlanTeleportForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('loc:site', pk=site.id)
+            tp = form.save(commit=False)
+            tp.src = plan
+            tp.save()
+
+            return redirect('loc:plan', pk=plan.id)
     else:
-        form = SiteMetaForm(instance=site)
+        form = PlanTeleportForm()
 
     context = {
-        'site': site,
+        'plan': plan,
         'form': form,
     }
 
-    return render(request, 'loc/edit_meta.html', context)
+    return render(request, 'loc/plan_add_teleport.html', context)
+
+
+def search(request):
+    form = PlanSearchForm(request.GET)
+
+    if form.is_valid():
+        plans = Plan.objects.filter(name__icontains=request.GET['term']).order_by('name').all()
+    else:
+        form = PlanSearchForm()
+        plans = []
+
+    context = {
+        'form': form,
+        'plans': plans,
+    }
+
+    return render(request, 'loc/search.html', context)

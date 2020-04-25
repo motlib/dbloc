@@ -1,0 +1,55 @@
+{% import 'loc/macros/objects.html' as o with context %}
+<html>
+  <head>
+    <title>Building Locator</title>
+    <link
+      rel="stylesheet"
+      href="{{ static('loc/style.css') }}" />
+  </head>
+  <body>
+    <div id="header" style="margin-left: 10pt; margin-right: 10pt;">
+      <div id="titlebox" style="display: inline-block; padding: 20px;">
+        <h1 style="font-family: sans-serif; font-weight: normal; color: #ff3d33;
+    margin:0; font-size: 1.5rem;">
+          Building Locator
+        </h1>
+        <div style="font-size: 1rem; color: #5f9834;">
+          {% block title %}&nbsp;{% endblock %}
+          </div>
+        </div>
+
+
+      <div id="nav_admin">
+        <div id="search">
+          <form method="GET" action="{{ url('loc:search') }}" style="margin: 0px;">
+            <input type="text" name="term" />
+            <input type="submit" value="Search" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="links" style="text-align: center;">
+      <span class="link">
+        <a href="{{ url('loc:index') }}">Home</a>
+      </span>
+      {% if user.is_authenticated %}
+      <!--{{ user.username }}-->
+
+      <span class="link">
+        <a href="{{ url('admin:index') }}">Administration</a>
+      </span>
+      <span class="link">
+        <a href="{{ url('logout') }}">Log out</a>
+      </span>
+      {% else %}
+      <span class="link">
+        <a href="{{ url('login') }}">Log in</a>
+      </span>
+      {% endif %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>

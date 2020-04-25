@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% from 'loc/macros/planlist.html' import planlist %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{{ planlist(plans) }}
+{% endblock %}
