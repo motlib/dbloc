@@ -5,5 +5,8 @@
 {% block title %}Search Results{% endblock %}
 
 {% block content %}
+
+<p>List of plans matching the search term '{{ term }}'.</p>
+
 {{ planlist(plans) }}
 {% endblock %}

@@ -81,17 +81,13 @@ def plan_add_teleport(request, pk):
 
 
 def search(request):
-    form = PlanSearchForm(request.GET)
+    term = request.GET['term']
 
-    if form.is_valid():
-        plans = Plan.objects.filter(name__icontains=request.GET['term']).order_by('name').all()
-    else:
-        form = PlanSearchForm()
-        plans = []
+    plans = Plan.objects.filter(name__icontains=term).order_by('name').all()
 
     context = {
-        'form': form,
         'plans': plans,
+        'term': term,
     }
 
     return render(request, 'loc/search.html', context)
