@@ -1,0 +1,4 @@
+#patches/
+docs/
+db.sqlite3
+.venv
