@@ -19,4 +19,4 @@ ADD . /usr/src/app/
 
 EXPOSE 8000
 # STOPSIGNAL SIGINT
-CMD ["./start-server.sh"]
+CMD ["./tools/start-server.sh"]
