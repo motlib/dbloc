@@ -2,17 +2,21 @@ FROM python:3.7
 
 ENV PYTHONUNBUFFERED 1
 
+COPY patches/sources.list /etc/apt/
+RUN apt-get update && apt-get upgrade -y && apt-get clean 
+
 # Copy patch for pip to use chinese PiPY mirror
 RUN mkdir -p /etc/xdg/pip
 COPY patches/pip.conf /etc/xdg/pip
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY requirements.txt /usr/src/app/
 
-RUN python3 -m pip install -r requirements.txt
+COPY requirements.txt /usr/src/app/
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
+
 ADD . /usr/src/app/
 
 EXPOSE 8000
-STOPSIGNAL SIGTERM
+# STOPSIGNAL SIGINT
 CMD ["./start-server.sh"]
