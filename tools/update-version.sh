@@ -9,17 +9,17 @@ function set_info {
 
     echo "Setting ${KEY}='${VAL}'"
 
-    sed -ie "/^${KEY} = /c ${KEY} = '${VAL}' " dbloc/versioninfo.py
+    sed -i -e "/^${KEY} = /c ${KEY} = '${VAL}' " dbloc/versioninfo.py
 }
 
 GIT_HASH=$(git rev-parse HEAD)
 GIT_TAG=$(git tag --points-at HEAD | tr '\n' ' ')
 
+# Add 'unclean' mark if there are modified files in the working copy
 if git diff --quiet;
 then
     GIT_HASH=$(GIT_HASH) unclean
     GIT_TAG=$(GIT_TAG) unclean
-
 fi
 
 set_info GIT_HASH "${GIT_HASH}"
