@@ -22,6 +22,7 @@ class Plan(models.Model):
             models.UniqueConstraint(fields=['parent', 'level'], name='unique_level')
         ]
 
+
     @property
     def lower_floor(self):
         '''Get the plan of the next lower floor.'''
@@ -31,6 +32,7 @@ class Plan(models.Model):
         except IndexError:
             return None
 
+
     @property
     def upper_floor(self):
         '''Get the plan of the next upper floor.'''
@@ -39,6 +41,14 @@ class Plan(models.Model):
             return self.parent.floor_set.filter(level__gt=self.level).order_by('level')[0]
         except IndexError:
             return None
+
+
+    @property
+    def sub_plans(self):
+        '''Return the sub plans for this plan. E.g. returns the floors or a building or
+        the buildings of a site.'''
+
+        return self.plan_set.order_by('name')
 
 
     def __str__(self):

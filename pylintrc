@@ -1,3 +1,4 @@
+# -*- mode:conf -*-
 [MASTER]
 
 # A comma-separated list of package or module names from where C extensions may
@@ -138,7 +139,8 @@ disable=print-statement,
         xreadlines-attribute,
         deprecated-sys-function,
         exception-escape,
-        comprehension-escape
+        comprehension-escape,
+        too-many-ancestors, # django generic view classes lead to this warning
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

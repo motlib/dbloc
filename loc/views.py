@@ -2,36 +2,38 @@
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
 
+from dbloc import versioninfo
 from .models import Plan
 from .forms import PlanMetaForm, PlanTeleportForm
-from dbloc import versioninfo
 
 
-def index(request):
-    '''Show the list of sites.'''
+class PlanIndexView(ListView):
+    '''Index list of top-level plans'''
 
-    plans = Plan.objects.filter(parent__isnull=True)
-
-    context = {
-        'plans': plans,
-    }
-
-    return render(request, 'loc/index.html', context)
+    queryset = Plan.objects.filter(parent__isnull=True)
+    context_object_name = 'plans'
+    paginate_by = 10
 
 
-def plan_details(request, pk):
-    '''Show the plan details.'''
-    plan = get_object_or_404(Plan, pk=pk)
+class PlanDetailView(DetailView):
+    '''Detail view of a plan.'''
 
-    context = {
-        'plan': plan,
-        'parent': plan.parent,
-        'sub_plans': plan.plan_set.order_by('name'),
-        'teleports': plan.teleports.all(),
-    }
+    model = Plan
+    context_object_name = 'plan'
 
-    return render(request, 'loc/plan.html', context)
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+
+        plan = context['plan']
+
+        context['parent'] = plan.parent
+        context['sub_plans'] = plan.sub_plans
+        context['teleports'] = plan.teleports.all()
+
+        return context
 
 
 @login_required
@@ -56,6 +58,7 @@ def plan_edit_meta(request, pk):
     }
 
     return render(request, 'loc/edit_meta.html', context)
+
 
 @login_required
 def plan_add_teleport(request, pk):
