@@ -14,10 +14,15 @@
 -   Style forms
 
 
-## DevOps
+## Quality
 
--   Makefile to build and run docker
+-   Set up pylint
+
+
+## DevOps
 
 -   Target to reploy docker to a-netz.de and run there
 
 -   Try to change to alpine linux to reduce image size
+
+-   DONE: Makefile to build and run docker
