@@ -11,16 +11,17 @@
 
 -   Add page to delete teleport
 
--   Style forms
+-   Style forms. Keep form error messages in mind.
 
 -   Create info page with application version. Fill version with current git
     hash (and tag) when building docker container.
 
+
 ## Quality
 
--   Set up pylint
-
 -   Add / configure django logging
+
+-   Write unit tests
 
 
 ## DevOps

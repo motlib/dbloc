@@ -21,6 +21,11 @@ docker:
 docker_run: docker
 	docker run --rm --name dbloc -p 8000:80 dbloc
 
+
+# Run pylint to check source code
 lint:
 	source ./.venv/bin/activate; \
-	pylint --rcfile pylintrc --output-format colorized dbloc loc
+	pylint --rcfile pylintrc \
+	    --output-format colorized \
+	    --load-plugins pylint_django \
+	    dbloc loc

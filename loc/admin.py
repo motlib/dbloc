@@ -1,48 +1,27 @@
-from django.contrib import admin
+'''Definition of admin forms for the `loc` application.'''
 
-# Register your models here.
+from django.contrib import admin
 
 from .models import Plan, Teleport
 
 
 class TeleportInline(admin.TabularInline):
+    '''Inline admin form to edit a teleport.'''
+
     model = Teleport
     extra = 1
     show_change_link = True
     fields = ['x', 'y', 'text', 'dest']
-    fk_name='src'
+    fk_name = 'src'
 
 
 class PlanAdmin(admin.ModelAdmin):
+    '''Admin form to edit a plan. Includes the teleport inline form.'''
+
     fieldset = [
         (None, {'fields': ['name']}),
     ]
     inlines = [TeleportInline]
 
 
-#class BuildingAdmin(admin.ModelAdmin):
-#    fieldsets = [
-#        (None, {'fields': ['name', 'site', 'address', 'url']}),
-#    ]
-#    inlines = [FloorInline, TeleportBuildingInline]
-
-
-#class BuildingInline(admin.TabularInline):
-#    model = Building
-#    extra = 1
-#    show_change_link = True
-#    fieldsets = [
-#        (None, {'fields': ['name', 'image']}),
-#    ]
-
-
-#class SiteAdmin(admin.ModelAdmin):
-#    fieldsets = [
-#        (None, {'fields': ['name']}),
-#    ]
-#    inlines = [BuildingInline]
-
-
-#admin.site.register(Site, SiteAdmin)
-#admin.site.register(Building, BuildingAdmin)
 admin.site.register(Plan, PlanAdmin)

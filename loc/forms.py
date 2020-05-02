@@ -1,9 +1,13 @@
+'''Forms used in the `loc` application.'''
+
 from django import forms
 
 from .models import Plan, Teleport
 
 
 class PlanMetaForm(forms.ModelForm):
+    '''Form to edit plan metadata.'''
+
     class Meta:
         model = Plan
         fields = ['description', 'address', 'url']
@@ -14,10 +18,8 @@ class PlanMetaForm(forms.ModelForm):
 
 
 class PlanTeleportForm(forms.ModelForm):
+    '''Form to edit a teleport.'''
+
     class Meta:
         model = Teleport
         fields = ['x', 'y', 'text', 'dest']
-
-
-class PlanSearchForm(forms.Form):
-    term = forms.CharField(max_length=200, label='')
