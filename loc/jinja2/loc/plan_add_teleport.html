@@ -22,12 +22,12 @@
 <form method="post">
   {{ csrf_input }}
 
-  <table>
+  <table class="form_table">
     {{ form.as_table() }}
   </table>
 
   <input type="Submit"  value="Save"/>
-  <a href="{{ url('loc:plan', args=[plan.id]) }}">Cancel</a>
+  <a class="cancel_button" href="{{ url('loc:plan', args=[plan.id]) }}">Cancel</a>
 </form>
 
 <script type="text/javascript">

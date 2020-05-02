@@ -7,21 +7,6 @@
  * Orange #fd8300
  */
 
-input[type=submit] {
-    padding:5px 15px;
-    background: #5f9834;
-    border:0 none;
-    color: black;
-    border-radius: 5px;
-}
-
-input[type=text] {
-    padding:5px 15px;
-    background: white;
-    border: 0 none;
-    border-radius: 5px;
-    color: black;
-}
 
 #links {
     margin-top: 15px;
@@ -124,11 +109,6 @@ h1 {
 
 }
 
-.form_table th {
-    font-size: small;
-    font-weight: bold;
-    vertical-align: top;
-}
 
 
 /* Infotable */
@@ -150,4 +130,45 @@ h1 {
 
 .infotable tr th, .infotable tr td {
     padding: 0.4em;
+}
+
+
+/* Forms */
+
+.form_table {
+    border: 1pt solid #eee;
+    margin: 5px;
+}
+
+.form_table th {
+    font-size: small;
+    font-weight: bold;
+    vertical-align: top;
+    text-align: left;
+}
+
+input[type=submit], .cancel_button{
+    padding:5px 15px;
+    margin: 3px;
+    background: #5f9834;
+    border: 1px solid #5f9834;
+//    border:0 none;
+    color: black;
+    border-radius: 5px;
+    font-size: small;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover, .cancel_button:hover {
+    color: white;
+}
+
+
+input[type=text] {
+    padding:5px 15px;
+    background: white;
+    border: 0 none;
+    border-radius: 5px;
+    color: black;
 }
