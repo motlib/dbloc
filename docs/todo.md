@@ -13,6 +13,11 @@
 
 -   Style forms
 
+-   Set up nginx to also serve media files
+
+-   DONE: Split settings into multiple files and define `dev` as default
+    setting.
+
 
 ## Quality
 
