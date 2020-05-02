@@ -2,12 +2,10 @@
 {% from 'loc/macros/planlist.html' import planlist %}
 {% from 'utils.html' import pagination with context %}
 
-{% block title %}Home{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<p>List of top-level plans:</p>
 {{ planlist(plans) }}
 
 {{ pagination() }}
-
 {% endblock %}

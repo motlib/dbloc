@@ -9,13 +9,9 @@
 -   Make plan display page universal for showing plan, selecting teleport,
     showing single (selected) teleport
 
--   Replace current search view by plan_list generic class view
-
 ## Styles
 
 -   Style forms. Keep form error messages in mind.
-
--   Make use of CSS variables
 
 
 ## Quality

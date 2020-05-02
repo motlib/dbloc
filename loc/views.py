@@ -16,6 +16,13 @@ class PlanIndexView(ListView):
     context_object_name = 'plans'
     paginate_by = 10
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['title'] = 'Top-level Plans'
+
+        return context
+
 
 class PlanDetailView(DetailView):
     '''Detail view of a plan.'''
@@ -89,15 +96,14 @@ def search(request):
     '''View for search results.'''
 
     term = request.GET['term']
-
     plans = Plan.objects.filter(name__icontains=term).order_by('name').all()
 
     context = {
         'plans': plans,
-        'term': term,
+        'title': "Search result: '{0}'".format(term)
     }
 
-    return render(request, 'loc/search.html', context)
+    return render(request, 'loc/plan_list.html', context)
 
 
 def info(request):
