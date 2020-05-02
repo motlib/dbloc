@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 
 from dbloc import versioninfo
-from .models import Plan
+from .models import Plan, Teleport
 from .forms import PlanMetaForm, PlanTeleportForm
 
 
@@ -114,3 +114,40 @@ def info(request):
     }
 
     return render(request, 'loc/info.html', context)
+
+
+# select tp -> edit tp
+def plan_select_tp(request, pk):
+    plan = get_object_or_404(Plan, pk=pk)
+
+    context = {
+        'plan': plan,
+        'tp_action': 'edit',
+        'parent': plan.parent,
+        'sub_plans': plan.sub_plans,
+        'teleports': plan.teleports.all(),
+    }
+
+    return render(request, 'loc/plan_detail.html', context)
+
+
+def tp_edit(request, pk):
+    teleport = get_object_or_404(Teleport, pk=pk)
+
+    if request.method == 'POST':
+        form = PlanTeleportForm(request.POST, instance=teleport)
+        if form.is_valid():
+            form.save()
+
+            return redirect('loc:plan', pk=teleport.src.id)
+    else:
+        form = PlanTeleportForm(instance=teleport)
+
+    context = {
+        'plan': teleport.src,
+        'teleport': teleport,
+        'teleports': (teleport,),
+        'form': form,
+    }
+
+    return render(request, 'loc/plan_add_teleport.html', context)

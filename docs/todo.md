@@ -2,16 +2,12 @@
 
 ## General Tasks
 
--   Add page to edit teleport
+-   Improve page to edit teleport
 
 -   Add page to delete teleport
 
 -   Make plan display page universal for showing plan, selecting teleport,
     showing single (selected) teleport
-
-## Styles
-
--   Style forms. Keep form error messages in mind.
 
 ## Quality
 
@@ -22,6 +18,6 @@
 
 ## DevOps
 
--   Target to reploy docker to a-netz.de and run there
-
 -   Try to change to alpine linux to reduce image size
+
+-   Target to reploy docker to a-netz.de and run there

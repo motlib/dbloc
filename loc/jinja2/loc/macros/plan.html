@@ -1,16 +1,24 @@
-{% macro plan_svg(plan_obj, teleports) %}
+{% macro plan_svg(plan_obj, teleports, tp_action='follow') %}
 <svg id="plan" version="1.1"
-     width="{{ plan_obj.image.width }}px" height="{{ plan_obj.image.height }}px"
+     width="{{ plan_obj.image.width }}px"
+     height="{{ plan_obj.image.height }}px"
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">
 
+  <!-- the plan image -->
   <image href="{{ plan_obj.image.url }}"
          x="0" y="0"
-         width="{{ plan_obj.image.width }}" height="{{ plan_obj.image.height }}" />
+         width="{{ plan_obj.image.width }}"
+         height="{{ plan_obj.image.height }}" />
 
   {% for teleport in teleports %}
 
+  {% if tp_action=='follow' %}
   {% set tp_link=url('loc:plan', args=[teleport.dest.id]) %}
+  {% endif %}
+  {% if tp_action=='edit' %}
+  {% set tp_link=url('loc:tp_edit', args=[teleport.id]) %}
+  {% endif %}
 
   <a xlink:href="{{ tp_link }}">
     <text
@@ -24,17 +32,16 @@
 {% endmacro %}
 
 
-{% macro plan(plan_obj, teleports, with_zoom=True) %}
+{% macro plan(plan_obj, teleports, zoom=True, tp_action='loc:plan') %}
 <div id="image">
   {% if plan_obj.image %}
-  {{ plan_svg(plan_obj, teleports) }}
+  {{ plan_svg(plan_obj, teleports, tp_action) }}
   {% else %}
   No image stored.
   {% endif %}
 </div>
 
-
-{% if with_zoom %}
+{% if zoom %}
 <script src="{{ static('loc/scripts/svg-pan-zoom.js') }}"></script>
 
 <script>

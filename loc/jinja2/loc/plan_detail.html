@@ -17,8 +17,10 @@
     {% endif %}
   </p>
 </div>
-
-{{ f.plan(plan, teleports, with_zoom=True) }}
+{% if not tp_action %}
+{% set tp_action='follow' %}
+{% endif %}
+{{ f.plan(plan, teleports, zoom=True, tp_action=tp_action) }}
 
 {% if parent %}
 <p><b>Parent:</b> <a href="{{ url('loc:plan', args=[parent.id]) }}">{{
@@ -35,6 +37,7 @@
   <a href="{{ url('loc:plan_edit_meta', args=[plan.id]) }}">Edit Metadata</a>
   {% if plan.image %}
   <a href="{{ url('loc:plan_add_tp', args=[plan.id]) }}">Add Teleport</a>
+  <a href="{{ url('loc:plan_select_tp', args=[plan.id]) }}">Edit Teleport</a>
   {% endif %}
 </p>
 
