@@ -16,9 +16,6 @@
 -   Create info page with application version. Fill version with current git
     hash (and tag) when building docker container.
 
--   DONE: Split settings into multiple files and define `dev` as default
-    setting.
-
 ## Quality
 
 -   Set up pylint
@@ -31,5 +28,3 @@
 -   Target to reploy docker to a-netz.de and run there
 
 -   Try to change to alpine linux to reduce image size
-
--   DONE: Makefile to build and run docker

@@ -19,8 +19,9 @@ COPY tools/nginx.conf /etc/nginx/sites-enabled/default
 RUN mkdir -p ${APP_DIR} ${APP_DIR}/media
 WORKDIR /${APP_DIR}
 
-COPY requirements.txt ${APP_DIR}
-RUN python3 -m pip install --no-cache-dir -r requirements.txt
+RUN mkdir requirements
+ADD requirements ${APP_DIR}/requirements
+RUN python3 -m pip install --no-cache-dir -r requirements/prod.txt
 
 ADD . ${APP_DIR}
 
