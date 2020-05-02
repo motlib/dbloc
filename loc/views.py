@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Plan
 from .forms import PlanMetaForm, PlanTeleportForm
+from dbloc import versioninfo
 
 
 def index(request):
@@ -94,3 +95,13 @@ def search(request):
     }
 
     return render(request, 'loc/search.html', context)
+
+
+def info(request):
+    '''View to show application info.'''
+
+    context = {
+        'info': versioninfo,
+    }
+
+    return render(request, 'loc/info.html', context)

@@ -11,10 +11,14 @@
 
 -   Add page to delete teleport
 
+-   Move static files to better locations.
+
+
+## Styles
+
 -   Style forms. Keep form error messages in mind.
 
--   Create info page with application version. Fill version with current git
-    hash (and tag) when building docker container.
+-   Make use of CSS variables
 
 
 ## Quality

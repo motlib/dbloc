@@ -129,3 +129,25 @@ h1 {
     font-weight: bold;
     vertical-align: top;
 }
+
+
+/* Infotable */
+
+.infotable {
+    font-size: small;
+    border-collapse: collapse;
+    border: 1pt solid #ccc;
+}
+
+.infotable th {
+    text-align: left;
+    font-weight: bold;
+}
+
+.infotable tr:hover {
+    background-color: #eee;
+}
+
+.infotable tr th, .infotable tr td {
+    padding: 0.4em;
+}

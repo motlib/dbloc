@@ -13,7 +13,11 @@ setup:
 # Build the docker image
 .PHONY: docker
 docker:
+	tools/update-version.sh
+
 	docker build --tag dbloc .
+
+	git checkout dbloc/versioninfo.py
 
 
 # Build and run the docker image
