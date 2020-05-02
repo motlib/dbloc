@@ -13,15 +13,17 @@
 
 -   Style forms
 
--   Set up nginx to also serve media files
+-   Create info page with application version. Fill version with current git
+    hash (and tag) when building docker container.
 
 -   DONE: Split settings into multiple files and define `dev` as default
     setting.
 
-
 ## Quality
 
 -   Set up pylint
+
+-   Add / configure django logging
 
 
 ## DevOps
