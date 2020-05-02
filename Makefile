@@ -20,3 +20,7 @@ docker:
 .PHONY: docker_run
 docker_run: docker
 	docker run --rm --name dbloc -p 8000:80 dbloc
+
+lint:
+	source ./.venv/bin/activate; \
+	pylint --rcfile pylintrc --output-format colorized dbloc loc
