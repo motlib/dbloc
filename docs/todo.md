@@ -6,8 +6,6 @@
 
 -   Add page to delete teleport
 
--   Move static files to better locations.
-
 -   Make plan display page universal for showing plan, selecting teleport,
     showing single (selected) teleport
 
