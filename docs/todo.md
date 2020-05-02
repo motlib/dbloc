@@ -13,7 +13,6 @@
 
 -   Style forms. Keep form error messages in mind.
 
-
 ## Quality
 
 -   Add / configure django logging

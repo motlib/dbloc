@@ -1,6 +1,8 @@
 '''Model definition for the `loc` application.'''
 
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Plan(models.Model):
@@ -58,11 +60,21 @@ class Plan(models.Model):
         return str(self.level)
 
 
+def validate_coord(value):
+    '''Validate that coordinate values are in range from 0.0 to 1.0.'''
+
+    if (value < 0.0) or (value > 1.0):
+        raise ValidationError(
+            _('%(value)s is our of range for coordinates (required 0.0-1.0).'),
+            params={'value': value})
+
+
 class Teleport(models.Model):
     '''A teleport represents a link from a location in a plan to another plan.'''
 
-    x = models.FloatField(default=0.0)
-    y = models.FloatField(default=0.0)
+    x = models.FloatField(default=0.0, validators=[validate_coord])
+    y = models.FloatField(default=0.0, validators=[validate_coord])
+
     text = models.CharField(default='', max_length=200)
     src = models.ForeignKey(
         Plan,

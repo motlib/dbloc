@@ -23,3 +23,8 @@ class PlanTeleportForm(forms.ModelForm):
     class Meta:
         model = Teleport
         fields = ['x', 'y', 'text', 'dest']
+
+        widgets = {
+            'x': forms.TextInput(),
+            'y': forms.TextInput(),
+        }

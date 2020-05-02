@@ -3,10 +3,6 @@
 # Start script for running inside docker container
 #
 
-# Start nginx for serving static and media files and act as a reverse proxy for
-# gunicorn
-service nginx start
-
 # Set up database
 python3 manage.py migrate
 
@@ -18,5 +14,9 @@ if [ -z "${DJANGO_SETTINGS_MODULE}" ]
 then
     export DJANGO_SETTINGS_MODULE=dbloc.settings.testing
 fi
+
+# Start nginx for serving static and media files and act as a reverse proxy for
+# gunicorn
+service nginx start
 
 exec gunicorn dbloc.wsgi
