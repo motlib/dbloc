@@ -2,17 +2,16 @@
 
 ## General Tasks
 
--   Add pagination to index page, etc.
-
--   Make plan display page universal for showing plan, selecting teleport,
-    showing single (selected) teleport
-
 -   Add page to edit teleport
 
 -   Add page to delete teleport
 
 -   Move static files to better locations.
 
+-   Make plan display page universal for showing plan, selecting teleport,
+    showing single (selected) teleport
+
+-   Replace current search view by plan_list generic class view
 
 ## Styles
 

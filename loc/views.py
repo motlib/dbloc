@@ -57,7 +57,7 @@ def plan_edit_meta(request, pk):
         'form': form
     }
 
-    return render(request, 'loc/edit_meta.html', context)
+    return render(request, 'loc/plan_edit_meta.html', context)
 
 
 @login_required

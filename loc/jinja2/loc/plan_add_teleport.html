@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% import 'loc/macros/objects.html' as obj %}
 {% import 'loc/macros/plan.html' as f %}
+{% from 'loc/macros/plan.html' import plan_info %}
 
 {% block title %}Add Teleport{% endblock %}
 
 {% block content %}
+{{ plan_info(plan) }}
 
 <div id="building_nav">
   <p>{% if plan.lower_floor %}Down: {{ obj.floor_link(plan.lower_floor) }}{% endif %}</p>
@@ -24,7 +26,8 @@
     {{ form.as_table() }}
   </table>
 
-  <input type="Submit" />
+  <input type="Submit"  value="Save"/>
+  <a href="{{ url('loc:plan', args=[plan.id]) }}">Cancel</a>
 </form>
 
 <script type="text/javascript">
@@ -38,7 +41,6 @@
 
       el_x.value = x
       el_y.value = y
-      //el_coords.innerText = 'X=' + x + '  Y=' + y
   });
 </script>
 

@@ -1,20 +1,13 @@
 {% extends 'base.html' %}
 {% import 'loc/macros/objects.html' as obj %}
 {% import 'loc/macros/plan.html' as f %}
+{% from 'loc/macros/plan.html' import plan_info %}
 {% from 'loc/macros/planlist.html' import planlist %}
 
 {% block title %}Plan View{% endblock %}
 
 {% block content %}
-<p>
-  Plan <i>{{ plan.name }}</i>
-  {% if plan.level is not none %}
-  on level {{plan.level}}
-  {% endif %}
-  {% if parent %}
-  of <a href="{{ url('loc:plan', args=[parent.id]) }}">{{ parent }}</a>
-  {% endif %}
-</p>
+{{ plan_info(plan) }}
 
 <div id="building_nav">
   <p>{% if plan.lower_floor %}Down: {{ obj.floor_link(plan.lower_floor) }}{% endif %}</p>
@@ -27,8 +20,6 @@
 
 {{ f.plan(plan, teleports, with_zoom=True) }}
 
-<p><a href="{{ url('loc:plan_add_tp', args=[plan.id]) }}">Add Teleport</a></tp>
-
 {% if parent %}
 <p><b>Parent:</b> <a href="{{ url('loc:plan', args=[parent.id]) }}">{{
     parent.name }}</a></p>
@@ -39,5 +30,12 @@
 {{ planlist(sub_plans) }}
 {% endif %}
 
+<p><b>Actions</b></p>
+<p>
+  <a href="{{ url('loc:plan_edit_meta', args=[plan.id]) }}">Edit Metadata</a>
+  {% if plan.image %}
+  <a href="{{ url('loc:plan_add_tp', args=[plan.id]) }}">Add Teleport</a>
+  {% endif %}
+</p>
 
 {% endblock %}

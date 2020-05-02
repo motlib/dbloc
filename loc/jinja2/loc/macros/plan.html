@@ -50,5 +50,18 @@
   };
 </script>
 {% endif %}
+{% endmacro %}
 
+
+{# Show an info text about a single plan. #}
+{% macro plan_info(plan) %}
+<p>
+  Plan <i>{{ plan.name }}</i>
+  {% if plan.level is not none %}
+  on level {{plan.level}}
+  {% endif %}
+  {% if plan.parent %}
+  of <a href="{{ url('loc:plan', args=[plan.parent.id]) }}">{{ plan.parent }}</a>
+  {% endif %}
+</p>
 {% endmacro %}

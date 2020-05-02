@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% from 'loc/macros/plan.html' import plan_info %}
+{% block title %}Edit Metadata{% endblock %}
+
+{% block content %}
+
+{{ plan_info(plan) }}
+
+<form method="post">
+  {{ csrf_input }}
+  <table class="form_table">
+    {{ form.as_table() }}
+  </table>
+
+  <input type="submit" value="Save" />
+  <a href="{{ url('loc:plan', args=[plan.id]) }}">Cancel</a>
+</form>
+
+{% endblock %}
