@@ -2,24 +2,26 @@ FROM python:3.7
 
 ENV PYTHONUNBUFFERED 1
 
-COPY patches/sources.list /etc/apt/
+ENV APP_DIR /usr/src/app
+
+# Copy patches for apt-get and pip to use Chinese mirrors
+COPY tools/patches/sources.list /etc/apt/
+RUN mkdir -p /etc/xdg/pip
+COPY tools/patches/pip.conf /etc/xdg/pip
+
 RUN apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y nginx-light \
   && apt-get clean
 COPY tools/nginx.conf /etc/nginx/sites-enabled/default
 
-# Copy patch for pip to use chinese PiPY mirror
-RUN mkdir -p /etc/xdg/pip
-COPY patches/pip.conf /etc/xdg/pip
+RUN mkdir -p ${APP_DIR}
+WORKDIR /${APP_DIR}
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-COPY requirements.txt /usr/src/app/
+COPY requirements.txt ${APP_DIR}
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
-ADD . /usr/src/app/
+ADD . ${APP_DIR}
 
 RUN python3 manage.py collectstatic --no-input
 
