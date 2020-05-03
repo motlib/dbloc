@@ -9,6 +9,8 @@
 -   Make plan display page universal for showing plan, selecting teleport,
     showing single (selected) teleport
 
+-   Add page to generate external link
+
 ## Quality
 
 -   Add / configure django logging

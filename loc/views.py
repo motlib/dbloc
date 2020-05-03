@@ -89,7 +89,7 @@ def plan_add_teleport(request, pk):
         'form': form,
     }
 
-    return render(request, 'loc/plan_add_teleport.html', context)
+    return render(request, 'loc/plan_edit_teleport.html', context)
 
 
 def search(request):
@@ -117,12 +117,13 @@ def info(request):
 
 
 # select tp -> edit tp
-def plan_select_tp(request, pk):
+@login_required
+def plan_select_tp(request, pk, tp_action):
     plan = get_object_or_404(Plan, pk=pk)
 
     context = {
         'plan': plan,
-        'tp_action': 'edit',
+        'tp_action': tp_action,
         'parent': plan.parent,
         'sub_plans': plan.sub_plans,
         'teleports': plan.teleports.all(),
@@ -150,4 +151,4 @@ def tp_edit(request, pk):
         'form': form,
     }
 
-    return render(request, 'loc/plan_add_teleport.html', context)
+    return render(request, 'loc/plan_edit_teleport.html', context)

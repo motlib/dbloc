@@ -28,3 +28,10 @@ class PlanTeleportForm(forms.ModelForm):
             'x': forms.TextInput(),
             'y': forms.TextInput(),
         }
+
+class TeleportDeleteForm(forms.ModelForm):
+    '''Form to delete a teleport.'''
+
+    class Meta:
+        model = Teleport
+        fields = ['text']
