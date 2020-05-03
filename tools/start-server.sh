@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #
 # Start script for running inside docker container
 #
@@ -17,6 +17,6 @@ fi
 
 # Start nginx for serving static and media files and act as a reverse proxy for
 # gunicorn
-service nginx start
+nginx -c /etc/nginx/nginx.conf
 
 exec gunicorn dbloc.wsgi

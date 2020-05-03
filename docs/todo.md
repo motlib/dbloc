@@ -18,6 +18,4 @@
 
 ## DevOps
 
--   Try to change to alpine linux to reduce image size
-
 -   Target to reploy docker to a-netz.de and run there

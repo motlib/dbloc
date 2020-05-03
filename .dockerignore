@@ -1,4 +1,5 @@
 docs/
 db.sqlite3
-.venv
+.venv/
 media/
+.git/
