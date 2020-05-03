@@ -7,7 +7,7 @@ function set_info {
     KEY=$1
     VAL=$2
 
-    echo "Setting ${KEY}='${VAL}'"
+    echo "Setting ${KEY} = '${VAL}'"
 
     sed -i -e "/^${KEY} = /c ${KEY} = '${VAL}' " dbloc/versioninfo.py
 }
@@ -24,3 +24,5 @@ fi
 
 set_info GIT_HASH "${GIT_HASH}"
 set_info GIT_TAG "${GIT_TAG}"
+set_info BUILD_DATE "$(date)"
+set_info BUILD_HOST "$(hostname -f)"
