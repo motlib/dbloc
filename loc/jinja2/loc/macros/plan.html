@@ -19,6 +19,9 @@
   {% if tp_action=='edit' %}
   {% set tp_link=url('loc:tp_edit', args=[teleport.id]) %}
   {% endif %}
+  {% if tp_action=='delete' %}
+  {% set tp_link=url('loc:tp_delete', args=[teleport.id]) %}
+  {% endif %}
 
   <a xlink:href="{{ tp_link }}">
     <text

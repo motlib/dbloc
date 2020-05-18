@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% from 'loc/macros/plan.html' import plan_info %}
+
+{% block title %}Delete Teleport{% endblock %}
+
+{% block content %}
+
+<form method="post">
+  {{ csrf_input }}
+  <p>
+    Are you sure you want to delete teleport "{{ tp }}" pointing from
+    "{{ tp.src }}" to "{{ tp.dest }}"?
+  </p>
+
+  <input type="submit" value="Confirm" />
+  <a class="cancel_button" href="{{ url('loc:plan', args=[tp.src.id]) }}">Cancel</a>
+</form>
+
+{% endblock %}

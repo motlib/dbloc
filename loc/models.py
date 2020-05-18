@@ -1,6 +1,7 @@
 '''Model definition for the `loc` application.'''
 
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -59,6 +60,9 @@ class Plan(models.Model):
 
         return str(self.level)
 
+    def get_absolute_url(self):
+        return reverse('loc:plan', args=[self.id])
+
 
 def validate_coord(value):
     '''Validate that coordinate values are in range from 0.0 to 1.0.'''
@@ -90,3 +94,6 @@ class Teleport(models.Model):
 
     class Meta:
         ordering = ('text', )
+
+    def __str__(self):
+        return self.text

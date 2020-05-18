@@ -38,6 +38,7 @@
   {% if plan.image %}
   <a href="{{ url('loc:plan_add_tp', args=[plan.id]) }}">Add Teleport</a>
   <a href="{{ url('loc:plan_select_tp', args=[plan.id, 'edit']) }}">Edit Teleport</a>
+  <a href="{{ url('loc:plan_select_tp', args=[plan.id, 'delete']) }}">Delete Teleport</a>
   {% endif %}
 </p>
 

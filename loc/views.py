@@ -2,7 +2,8 @@
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, UpdateView
 
 from dbloc import versioninfo
 from .models import Plan, Teleport
@@ -43,28 +44,12 @@ class PlanDetailView(DetailView):
         return context
 
 
-@login_required
-def plan_edit_meta(request, pk):
+class PlanMetaEdit(LoginRequiredMixin, UpdateView):
     '''Edit the metadata of a plan.'''
 
-    plan = get_object_or_404(Plan, pk=pk)
-
-    if request.method == "POST":
-        form = PlanMetaForm(request.POST, instance=plan)
-        if form.is_valid():
-            form.save()
-
-            # return to the building view
-            return redirect('loc:plan', pk=plan.id)
-    else:
-        form = PlanMetaForm(instance=plan)
-
-    context = {
-        'plan': plan,
-        'form': form
-    }
-
-    return render(request, 'loc/plan_edit_meta.html', context)
+    model = Plan
+    fields = ['address', 'description', 'url']
+    template_name = 'loc/plan_edit_meta.html'
 
 
 @login_required
@@ -119,6 +104,8 @@ def info(request):
 # select tp -> edit tp
 @login_required
 def plan_select_tp(request, pk, tp_action):
+    '''Select a teleport for next action (edit, delete)'''
+
     plan = get_object_or_404(Plan, pk=pk)
 
     context = {
@@ -133,6 +120,8 @@ def plan_select_tp(request, pk, tp_action):
 
 
 def tp_edit(request, pk):
+    '''Edit a teleport'''
+
     teleport = get_object_or_404(Teleport, pk=pk)
 
     if request.method == 'POST':
@@ -152,3 +141,21 @@ def tp_edit(request, pk):
     }
 
     return render(request, 'loc/plan_edit_teleport.html', context)
+
+
+@login_required
+def tp_delete(request, pk):
+    '''Confirm to delete a teleport.'''
+
+    tp = get_object_or_404(Teleport, pk=pk)
+
+    if request.method == 'POST':
+        plan = tp.src
+        tp.delete()
+
+        return redirect('loc:plan', pk=plan.id)
+    else:
+        context = {
+            'tp': tp
+        }
+        return render(request, 'loc/teleport_confirm_delete.html', context)
