@@ -8,6 +8,11 @@
  */
 
 
+#content {
+    padding: 3rem 1.5rem;
+ /*   text-align: center;*/
+}
+
 #links {
     margin-top: 15px;
     margin-bottom: 15px;

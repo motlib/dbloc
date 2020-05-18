@@ -1,58 +1,28 @@
 {% import 'loc/macros/objects.html' as o with context %}
-<html>
+<!doctype html>
+<html lang="en">
   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="{{ static('css/bootstrap.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ static('css/style.css') }}" />
+
     <title>Building Locator</title>
-    <link
-      rel="stylesheet"
-      href="{{ static('css/style.css') }}" />
   </head>
   <body>
-    <div id="header">
-      <div id="titlebox" style="display: inline-block; padding: 20px;">
-        <h1 style="font-family: sans-serif; font-weight: normal; color: #ff3d33;
-    margin:0; font-size: 1.5rem;">
-          Building Locator
-        </h1>
-        <div style="font-size: 1rem; color: #5f9834;">
-          {% block title %}&nbsp;{% endblock %}
-          </div>
-        </div>
+    {% include 'navbar.html' %}
 
-
-      <div id="nav_admin">
-        <div id="search">
-          <form method="GET" action="{{ url('loc:search') }}" style="margin: 0px;">
-            <input type="text" name="term" />
-            <input type="submit" value="Search" />
-          </form>
-        </div>
+    <main class="container" role="main">
+      <div id="content">
+        {% block content %}{% endblock %}
       </div>
-    </div>
+    </main>
 
-    <div id="links" style="text-align: center;">
-      <span class="link">
-        <a href="{{ url('loc:index') }}">Home</a>
-      </span>
-      {% if user.is_authenticated %}
-      <!--{{ user.username }}-->
-
-      <span class="link">
-        <a href="{{ url('admin:index') }}">Administration</a>
-      </span>
-      <span class="link">
-        <a href="{{ url('logout') }}">Log out</a>
-      </span>
-      {% else %}
-      <span class="link">
-        <a href="{{ url('login') }}">Log in</a>
-      </span>
-      {% endif %}
-      <span class="link">
-        <a href="{{ url('loc:info') }}">Info</a>
-      </span>
-    </div>
-
-    {% block content %}
-    {% endblock %}
+    <script src="{{ static('js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ static('js/bootstrap.min.js') }}"></script>
   </body>
 </html>

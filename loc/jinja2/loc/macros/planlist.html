@@ -1,15 +1,29 @@
 {% macro planlist(plans) %}
 {% if plans %}
-<ul class="planlist">
+<!--<div class="card-deck"> -->
+  <div class="row row-cols-1 row-cols-md-4">
   {% for plan in plans %}
-  <li>
-    <a href="{{ url('loc:plan', args=[plan.id]) }}">
-      {{ plan.name }}
-    </a>
-  </li>
+  {{ plan_card(plan) }}
   {% endfor %}
-</ul>
+  </div>
 {% else %}
 <p>No plans available.</p>
 {% endif %}
+{% endmacro %}
+
+
+{% macro plan_card(plan) %}
+<div class="col mb-4">
+  <div class="card h-100">
+    <div class="card-body">
+      <h5 class="card-title">{{ plan.name }}</h5>
+      {% if plan.description %}
+      <p class="card-text">{{ plan.description | truncate(150) }}</p>
+      {% endif %}
+    </div>
+    <div class="card-footer">
+      <a href="{{ url('loc:plan', args=[plan.id]) }}" class="card-link">View</a>
+    </div>
+  </div>
+</div>
 {% endmacro %}
