@@ -40,6 +40,7 @@ class PlanDetailView(DetailView):
         context['parent'] = plan.parent
         context['sub_plans'] = plan.sub_plans
         context['teleports'] = plan.teleports.all()
+        context['tp_action'] = 'loc:tp_follow'
 
         return context
 
@@ -141,6 +142,14 @@ def tp_edit(request, pk):
     }
 
     return render(request, 'loc/plan_edit_teleport.html', context)
+
+
+def tp_follow(request, pk):
+    '''Redirect a teleport to the destination plan.'''
+
+    teleport = get_object_or_404(Teleport, pk=pk)
+
+    return redirect('loc:plan', pk=teleport.dest.id)
 
 
 @login_required

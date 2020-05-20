@@ -1,0 +1,18 @@
+<div id="building_nav">
+  <p>
+    {% if plan.lower_floor %}
+    Down:
+    <span class="floor">
+      <a href="{% url 'loc:plan' plan.lower_floor.id %}">{{ plan.lower_floor }}</a>
+    </span>
+    {% endif %}
+  </p>
+  <p>
+    {% if plan.upper_floor %}
+    Up:
+    <span class="floor">
+      <a href="{% url 'loc:plan' plan.upper_floor.id %}">{{ plan.upper_floor }}</a>
+    </span>
+    {% endif %}
+  </p>
+</div>

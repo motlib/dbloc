@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Metadata{% endblock %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  {{ form|crispy }}
+
+  <button class="btn btn-primary" type="submit" value="Save">Save</button>
+  <a class="btn btn-secondary" href="{% url 'loc:plan' plan.id %}">Cancel</a>
+</form>
+
+{% endblock %}

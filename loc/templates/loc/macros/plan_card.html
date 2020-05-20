@@ -1,0 +1,13 @@
+<div class="col mb-4">
+  <div class="card h-100">
+    <div class="card-body">
+      <h5 class="card-title">{{ plan.name }}</h5>
+      {% if plan.description %}
+      <p class="card-text">{{ plan.description | truncatechars:150 }}</p>
+      {% endif %}
+    </div>
+    <div class="card-footer">
+      <a href="{% url 'loc:plan' plan.id %}" class="card-link">View</a>
+    </div>
+  </div>
+</div>

@@ -30,20 +30,34 @@ class Plan(models.Model):
     def lower_floor(self):
         '''Get the plan of the next lower floor.'''
 
-        try:
-            return self.parent.floor_set.filter(level__lt=self.level).order_by('-level')[0]
-        except IndexError:
+        # we can only manage floors if we have a parent. Otherwise we do not
+        # know which floors belong to the same building.
+        if (not self.parent) or (not self.level):
             return None
+
+        return Plan.objects\
+            .filter(
+                parent=self.parent,
+                level__lt=self.level)\
+            .order_by('level')\
+            .first()
 
 
     @property
     def upper_floor(self):
         '''Get the plan of the next upper floor.'''
 
-        try:
-            return self.parent.floor_set.filter(level__gt=self.level).order_by('level')[0]
-        except IndexError:
+        # we can only manage floors if we have a parent. Otherwise we do not
+        # know which floors belong to the same building.
+        if (not self.parent) or (not self.level):
             return None
+
+        return Plan.objects\
+            .filter(
+                parent=self.parent,
+                level__lt=self.level)\
+            .order_by('level')\
+            .first()
 
 
     @property
@@ -97,3 +111,27 @@ class Teleport(models.Model):
 
     def __str__(self):
         return self.text
+
+
+    def get_image_x(self):
+        '''Return the absolute x coordinate of this teleport (i.e. scaled to the image
+        size of the plan).
+
+        '''
+
+        if not self.src:
+            return 0
+
+        return int(self.src.image.width * self.x)
+
+
+    def get_image_y(self):
+        '''Return the absolute y coordinate of this teleport (i.e. scaled to the image
+        size of the plan).
+
+        '''
+
+        if not self.src:
+            return 0
+
+        return int(self.src.image.height * self.y)

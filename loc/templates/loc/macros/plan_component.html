@@ -1,0 +1,25 @@
+{% load static %}
+<div id="image">
+  {% if plan.image %}
+  {% include 'loc/macros/plan_svg.html' with plan=plan teleports=teleports tp_action=tp_action %}
+  {% else %}
+  No image stored.
+  {% endif %}
+</div>
+
+{% if zoom %}
+<script src="{% static 'loc/scripts/svg-pan-zoom.js' %}"></script>
+
+<script>
+  // Don't use window.onLoad like this in production, because it can only
+  // listen to one function.
+  window.onload = function() {
+      // Expose to window namespase for testing purposes
+      svgPanZoom('#plan', {
+          zoomEnabled: true,
+          controlIconsEnabled: true,
+          fit: true,
+          center: true});
+  };
+</script>
+{% endif %}

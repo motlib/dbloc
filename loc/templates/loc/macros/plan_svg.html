@@ -1,0 +1,22 @@
+<svg id="plan" version="1.1"
+     width="{{ plan.image.width }}px"
+     height="{{ plan.image.height }}px"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <!-- the plan image -->
+  <image href="{{ plan.image.url }}"
+         x="0" y="0"
+         width="{{ plan.image.width }}"
+         height="{{ plan.image.height }}" />
+
+  {% for teleport in teleports %}
+  <a xlink:href="{% url tp_action|default:'loc:tp_follow' teleport.id %}">
+    <text
+        x="{{ teleport.get_image_x }}"
+        y="{{ teleport.get_image_y }}"
+        class="teleport_link"
+        >{{ teleport.text }}</text>
+  </a>
+  {% endfor %}
+</svg>

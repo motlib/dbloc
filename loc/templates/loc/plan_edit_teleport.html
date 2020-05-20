@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Add Teleport{% endblock %}
+
+{% block content %}
+
+{% include 'loc/macros/floor_nav.html' with plan=plan %}
+
+{% include 'loc/macros/plan_component.html' with plan=plan teleports=teleports zoom=True tp_action=tp_action %}
+
+<p>
+  To set the coordinates (x and y) of the teleport, please double-click on the
+  plan.
+</p>
+
+<form method="post">
+  {% csrf_token %}
+
+  {{ form | crispy }}
+
+  <button class="btn btn-primary" type="Submit">Save</button>
+  <a class="btn btn-secondary" href="{% url 'loc:plan' plan.id %}">Cancel</a>
+</form>
+
+<script type="text/javascript">
+  el_plan = document.getElementById('plan')
+  el_x = document.getElementById('id_x')
+  el_y = document.getElementById('id_y')
+
+  el_plan.addEventListener('dblclick', e => {
+      x = ((e.offsetX) / el_plan.width.baseVal.value).toFixed(2)
+      y = ((e.offsetY) / el_plan.height.baseVal.value).toFixed(2)
+
+      el_x.value = x
+      el_y.value = y
+  });
+</script>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-{% import 'loc/macros/objects.html' as o with context %}
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,11 +7,11 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet"
-          href="{{ static('css/bootstrap.min.css') }}">
+          href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet"
-          href="{{ static('css/style.css') }}" />
+          href="{% static 'css/style.css' %}" />
 
-    <title>Building Locator</title>
+    <title>dbloc</title>
   </head>
   <body>
     {% include 'navbar.html' %}
@@ -22,7 +22,7 @@
       </div>
     </main>
 
-    <script src="{{ static('js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ static('js/bootstrap.min.js') }}"></script>
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>
 </html>

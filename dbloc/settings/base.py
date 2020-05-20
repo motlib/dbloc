@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Automatically delete files from ImageField and FileField
     'django_cleanup.apps.CleanupConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -57,29 +58,11 @@ ROOT_URLCONF = 'dbloc.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-    {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'DIRS': [
-            os.path.join(BASE_DIR, 'dbloc/jinja2'),
+            os.path.join(BASE_DIR, 'dbloc/templates'),
         ],
-        #'DIRS': [
-        #    os.path.join(BASE_DIR, 'dbloc/templates'),
-        #    os.path.join(BASE_DIR, 'loc/templates'),
-        #],
         'APP_DIRS': True,
         'OPTIONS': {
-            'environment': 'dbloc.jinja2.environment',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -88,6 +71,26 @@ TEMPLATES = [
             ],
         },
     },
+#    {
+#        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+#        'DIRS': [
+#            os.path.join(BASE_DIR, 'dbloc/jinja2'),
+#        ],
+#        #'DIRS': [
+#        #    os.path.join(BASE_DIR, 'dbloc/templates'),
+#        #    os.path.join(BASE_DIR, 'loc/templates'),
+#        #],
+#        'APP_DIRS': True,
+#        'OPTIONS': {
+#            'environment': 'dbloc.jinja2.environment',
+#            'context_processors': [
+#                'django.template.context_processors.debug',
+#                'django.template.context_processors.request',
+#                'django.contrib.auth.context_processors.auth',
+#                'django.contrib.messages.context_processors.messages',
+#            ],
+#        },
+#    },
 ]
 
 WSGI_APPLICATION = 'dbloc.wsgi.application'
@@ -156,3 +159,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'loc:index'
 LOGOUT_REDIRECT_URL = 'loc:index'
+
+# Select the template pack (framework) for crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

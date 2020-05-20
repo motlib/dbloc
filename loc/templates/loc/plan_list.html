@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+{% include 'loc/macros/planlist.html' with plans=plans %}
+
+{% include 'pagination.html' with page_obj=page_obj %}
+{% endblock %}
