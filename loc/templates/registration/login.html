@@ -9,10 +9,12 @@
 
 {% if next %}
 {% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed,
-  please login with an account that has access.</p>
+<p class="alert alert-danger">
+  Your account doesn't have access to this page. To proceed, please login with
+  an account that has access.
+</p>
 {% else %}
-<p>Please log in to see this page.</p>
+<p class="alert alert-info">Please log in to see the requested page.</p>
 {% endif %}
 {% endif %}
 
