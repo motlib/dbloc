@@ -53,13 +53,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'dbloc.urls'
+ROOT_URLCONF = 'dbloc_project.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'dbloc/templates'),
+            os.path.join(BASE_DIR, 'dbloc_project/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -71,29 +71,9 @@ TEMPLATES = [
             ],
         },
     },
-#    {
-#        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-#        'DIRS': [
-#            os.path.join(BASE_DIR, 'dbloc/jinja2'),
-#        ],
-#        #'DIRS': [
-#        #    os.path.join(BASE_DIR, 'dbloc/templates'),
-#        #    os.path.join(BASE_DIR, 'loc/templates'),
-#        #],
-#        'APP_DIRS': True,
-#        'OPTIONS': {
-#            'environment': 'dbloc.jinja2.environment',
-#            'context_processors': [
-#                'django.template.context_processors.debug',
-#                'django.template.context_processors.request',
-#                'django.contrib.auth.context_processors.auth',
-#                'django.contrib.messages.context_processors.messages',
-#            ],
-#        },
-#    },
 ]
 
-WSGI_APPLICATION = 'dbloc.wsgi.application'
+WSGI_APPLICATION = 'dbloc_project.wsgi.application'
 
 
 # Database
@@ -147,7 +127,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Additional directories that are searched for static files
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'dbloc/static'),
+    os.path.join(BASE_DIR, 'dbloc_project/static'),
 )
 
 

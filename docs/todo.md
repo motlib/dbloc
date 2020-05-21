@@ -11,6 +11,8 @@
 
 -   Add page to generate external link
 
+-   Style for plan teleport links
+
 ## Quality
 
 -   Add / configure django logging
