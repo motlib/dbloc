@@ -1,0 +1,89 @@
+- model: dbloc.plan
+  pk: 1
+  fields:
+    name: Fertighauspark Wuppertal
+    image: fertighauswelt_wuppertal.png
+    parent: null
+    level: null
+    description: "In der FertighausWelt Wuppertal l\xE4sst sich schon heute live erleben,\
+      \ was H\xE4user in Zukunft alles k\xF6nnen werden. Die Ausstellung ist ein Modellprojekt\
+      \ der Fertigbau-Branche f\xFCr die Entwicklung nachhaltiger und energieeffizienter\
+      \ Quartiere. Alle Musterh\xE4user sind miteinander vernetzt und verf\xFCgen\
+      \ \xFCber eine zentrale Speicherbatterie, so dass Energie gemeinschaftlich erzeugt,\
+      \ gespeichert und verteilt werden kann. Mit dieser Ausstellung gibt der moderne\
+      \ Fertigbau die Antwort auf die Schl\xFCsselfrage, wie die Energiebilanz von\
+      \ H\xE4usern immer weiter verbessert werden kann. Und ganz nebenbei \xFCberzeugen\
+      \ die H\xE4user mit toller Architektur."
+    address: "Schmiedestra\xDFe 59\r\n42279 Wuppertal-Oberbarmen"
+    url: https://www.fertighauswelt.de
+- model: dbloc.plan
+  pk: 2
+  fields:
+    name: Fingerhaus Neo 312
+    image: fingerhaus-neo-312-musterhaus-wuppertal-aussenansicht-02_TzvAeHV.jpg
+    parent: 1
+    level: null
+    description: "Baustil: Klassisches Familienhaus\r\nZimmer: 8\r\nWohnfl\xE4che:\
+      \ 157,28m\xB2\r\nEnergetischer Standard: KfW-Effizienzhaus 55"
+    address: ''
+    url: ''
+- model: dbloc.plan
+  pk: 3
+  fields:
+    name: Erdgeschoss
+    image: fingerhaus-neo-312-musterhaus-wuppertal-grundriss-erdgeschoss_4a8JGdM.jpg
+    parent: 2
+    level: 0
+    description: ''
+    address: ''
+    url: ''
+- model: dbloc.plan
+  pk: 4
+  fields:
+    name: Obergeschoss
+    image: fingerhaus-neo-312-musterhaus-wuppertal-grundriss-dachgeschoss_wxBFOGe.jpg
+    parent: 2
+    level: 1
+    description: ''
+    address: ''
+    url: ''
+- model: dbloc.teleport
+  pk: 1
+  fields:
+    x: 0.45
+    y: 0.37
+    text: go up
+    src: 3
+    dest: 4
+- model: dbloc.teleport
+  pk: 2
+  fields:
+    x: 0.46
+    y: 0.41
+    text: go down
+    src: 4
+    dest: 3
+- model: dbloc.teleport
+  pk: 3
+  fields:
+    x: 0.39
+    y: 0.55
+    text: go
+    src: 1
+    dest: 2
+- model: dbloc.teleport
+  pk: 4
+  fields:
+    x: 0.23
+    y: 0.67
+    text: go in
+    src: 2
+    dest: 3
+- model: dbloc.teleport
+  pk: 5
+  fields:
+    x: 0.22
+    y: 0.43
+    text: out
+    src: 3
+    dest: 2
