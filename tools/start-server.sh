@@ -12,11 +12,11 @@ python3 manage.py initadmin
 # If nothing else is set already, we run the testing config for the container
 if [ -z "${DJANGO_SETTINGS_MODULE}" ]
 then
-    export DJANGO_SETTINGS_MODULE=dbloc.settings.testing
+    export DJANGO_SETTINGS_MODULE=dbloc_project.settings.testing
 fi
 
 # Start nginx for serving static and media files and act as a reverse proxy for
 # gunicorn
 nginx -c /etc/nginx/nginx.conf
 
-exec gunicorn dbloc.wsgi
+exec gunicorn dbloc_project.wsgi
