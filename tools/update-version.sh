@@ -9,7 +9,7 @@ function set_info {
 
     echo "Setting ${KEY} = '${VAL}'"
 
-    sed -i -e "/^${KEY} = /c ${KEY} = '${VAL}' " dbloc/versioninfo.py
+    sed -i -e "/^${KEY} = /c ${KEY} = '${VAL}' " dbloc_project/versioninfo.py
 }
 
 GIT_HASH=$(git rev-parse HEAD)
