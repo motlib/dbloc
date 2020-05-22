@@ -10,12 +10,19 @@ setup:
 	python -m pip install -r requirements/dev.txt;
 
 
+# set to
+ifeq (${TRAVIS},true)
+  CN_MIRROR=0
+else
+  CN_MIRROR=1
+endif
+
 # Build the docker image
 .PHONY: docker
 docker:
 	tools/update-version.sh
 
-	docker build --tag dbloc .
+	docker build --build-arg CN_MIRROR=${CN_MIRROR} --tag dbloc .
 
 	git checkout dbloc_project/versioninfo.py
 
