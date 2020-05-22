@@ -2,27 +2,32 @@
 
 {% block title %}Info{% endblock %}
 
+
 {% block content %}
-<table class="infotable">
-  <tr>
-    <th>Application Version</th>
-    <td>{{ info.VERSION }}</td>
-  </tr>
-  <tr>
-    <th>Git Tag</th>
-    <td>{{ info.GIT_TAG }}</td>
-  </tr>
-  <tr>
-    <th>Git Hash</th>
-    <td>{{ info.GIT_HASH }}</td>
-  </tr>
-  <tr>
-    <th>Build Date</th>
-    <td>{{ info.BUILD_DATE }}</td>
-  </tr>
-  <tr>
-    <th>Build Host</th>
+<h2>Application Version Information</h2>
+
+<div class="row mt-4">
+  <table class="table table-hover col-6">
+    <tr>
+      <th scope="row">Application Version</th>
+      <td>{{ info.VERSION }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Git Tag</th>
+      <td>{{ info.GIT_TAG }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Git Hash</th>
+      <td>{{ info.GIT_HASH }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Build Date</th>
+      <td>{{ info.BUILD_DATE }}</td>
+    </tr>
+    <tr scope="row">
+      <th>Build Host</th>
     <td>{{ info.BUILD_HOST }}</td>
-  </tr>
-</table>
+    </tr>
+  </table>
+</div>
 {% endblock %}
