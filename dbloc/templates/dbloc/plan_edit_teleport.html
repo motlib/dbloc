@@ -18,7 +18,23 @@
 <form method="post">
   {% csrf_token %}
 
-  {{ form | crispy }}
+  <div class="form-row">
+    <div class="col-3">
+      {{ form.x | as_crispy_field }}
+    </div>
+    <div class="col-3">
+      {{ form.y | as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form.text | as_crispy_field }}
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col">
+      {{ form.dest | as_crispy_field }}
+    </div>
+  </div>
 
   <button class="btn btn-primary" type="Submit">Save</button>
   <a class="btn btn-secondary" href="{% url 'dbloc:plan' plan.id %}">Cancel</a>

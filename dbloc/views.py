@@ -10,7 +10,7 @@ from django.forms import inlineformset_factory
 
 from dbloc_project import versioninfo
 from .models import Plan, Teleport
-from .forms import PlanTeleportForm, PlanMetaForm
+from .forms import PlanTeleportForm, PlanForm
 
 
 class PlanIndexView(ListView):
@@ -52,16 +52,16 @@ class PlanEditView(LoginRequiredMixin, UpdateView):
     '''Edit the metadata of a plan.'''
 
     model = Plan
-    form_class = PlanMetaForm
-    template_name = 'dbloc/plan_edit_meta.html'
+    form_class = PlanForm
+    template_name = 'dbloc/plan_edit.html'
     context_object_name = 'plan'
 
 
 class PlanCreateView(LoginRequiredMixin, CreateView):
     '''Create a new top-level plan (i.e. with parent set to null).'''
     model = Plan
-    form_class = PlanMetaForm
-    template_name = 'dbloc/plan_edit_meta.html'
+    form_class = PlanForm
+    template_name = 'dbloc/plan_edit.html'
 
 
 
