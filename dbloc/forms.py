@@ -10,7 +10,7 @@ class PlanMetaForm(forms.ModelForm):
 
     class Meta:
         model = Plan
-        fields = ['name', 'description', 'address', 'url']
+        fields = ['name', 'image', 'description', 'address', 'url']
         widgets = {
             'address': forms.Textarea(attrs={'rows': 5}),
             'description': forms.Textarea(attrs={'rows': 5})
@@ -24,6 +24,14 @@ class PlanMetaForm(forms.ModelForm):
             'url': 'Web Address',
             'address': 'Physical Address',
         }
+
+
+#class PlanBasicForm(forms.ModelForm):
+#    class Meta:
+#        model = Plan
+#        fields = ['name', 'level']
+
+
 #
 #
 #class PlanImageForm(forms.ModelForm):

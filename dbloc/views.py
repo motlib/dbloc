@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, UpdateView
 
+from django.forms import inlineformset_factory
+
 from dbloc_project import versioninfo
 from .models import Plan, Teleport
 from .forms import PlanTeleportForm, PlanMetaForm
@@ -45,23 +47,42 @@ class PlanDetailView(DetailView):
         return context
 
 
-class PlanMetaEdit(LoginRequiredMixin, UpdateView):
+class PlanEditView(LoginRequiredMixin, UpdateView):
     '''Edit the metadata of a plan.'''
 
     model = Plan
     form_class = PlanMetaForm
-    #fields = ['address', 'description', 'url']
     template_name = 'dbloc/plan_edit_meta.html'
     context_object_name = 'plan'
 
 
-class PlanEditImage(LoginRequiredMixin, UpdateView):
-    '''Edit (upload) the image of a plan.'''
 
-    model = Plan
-    fields = ['image']
-    template_name = 'dbloc/plan_edit_image.html'
-    context_object_name = 'plan'
+def plan_edit_subplans(request, pk):
+    plan = get_object_or_404(Plan, pk=pk)
+
+    PlanFormSet = inlineformset_factory(
+        parent_model=Plan,
+        model=Plan,
+        fk_name='parent',
+        fields=['name', 'level'],
+        extra=1)
+
+    if request.method == "POST":
+        formset = PlanFormSet(request.POST, instance=plan)
+        if formset.is_valid():
+            formset.save()
+            # Do something. Should generally end with a redirect. For example:
+            return redirect(plan.get_absolute_url())
+    else:
+        formset = PlanFormSet(instance=plan)
+
+    context = {
+        'formset': formset,
+        'plan': plan,
+    }
+
+    return render(request, 'dbloc/plan_edit_subplans.html', context)
+
 
 
 @login_required

@@ -12,17 +12,32 @@
   <div class="col-8">
     {% include 'dbloc/macros/plan_component.html' with plan=plan teleports=teleports zoom=True tp_action=tp_action %}
   </div>
+
   <div class="col-4">
+    {% if plan.description %}
     <p>
-      <strong>Metadata</strong>
-      {% if user.is_authenticated %}
-      (<a href="{% url 'dbloc:plan_edit_meta' plan.id %}">edit</a>)
-      {% endif %}
+      <strong>Description:</strong>
+      {{plan.description}}
     </p>
-    <p><strong>Description: </strong>{{plan.description}}</p>
-    <p><strong>Address: </strong>{{ plan.address }}</p>
+    {% endif %}
+
+    {% if plan.address %}
+    <p>
+      <strong>Address:</strong><br />
+      {{ plan.address|linebreaksbr }}
+    </p>
+    {% endif %}
+
+    {% if plan.url %}
+    <p>
+      <strong>Website:</strong>
+      <a href="{{ plan.url }}">{{ plan.url }}</a></p>
+    {% endif %}
+    <p>
   </div>
 </div>
+
+<hr />
 
 {% if parent %}
 <p>
@@ -38,7 +53,10 @@
 
 <p><b>Actions</b></p>
 <p>
-  <a href="{% url 'dbloc:plan_edit_image' plan.id %}">Change Image</a>
+  {% if user.is_authenticated %}
+  <a href="{% url 'dbloc:plan_edit' plan.id %}">Edit Plan</a>
+  <a href="{% url 'dbloc:plan_edit_subplans' plan.id %}">Edit Subplans</a>
+  {% endif %}
   {% if plan.image %}
   <a href="{% url 'dbloc:plan_add_tp' plan.id %}">Add Teleport</a>
   <a href="{% url 'dbloc:plan_select_tp' plan.id 'dbloc:tp_edit' %}">Edit Teleport</a>
