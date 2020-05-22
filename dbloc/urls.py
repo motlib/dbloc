@@ -4,7 +4,7 @@ from django.urls import path
 
 from . import views
 
-app_name = 'loc'
+app_name = 'dbloc'
 
 urlpatterns = [
     path('', views.PlanIndexView.as_view(), name='index'),

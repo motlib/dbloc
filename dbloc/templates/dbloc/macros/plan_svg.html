@@ -11,7 +11,7 @@
          height="{{ plan.image.height }}" />
 
   {% for teleport in teleports %}
-  <a xlink:href="{% url tp_action|default:'loc:tp_follow' teleport.id %}">
+  <a xlink:href="{% url tp_action|default:'dbloc:tp_follow' teleport.id %}">
     <text
         x="{{ teleport.get_image_x }}"
         y="{{ teleport.get_image_y }}"

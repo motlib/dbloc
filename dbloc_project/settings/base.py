@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'loc.apps.LocConfig',
+    'dbloc.apps.LocConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

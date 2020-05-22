@@ -6,9 +6,9 @@
 
 {% block content %}
 
-{% include 'loc/macros/floor_nav.html' with plan=plan %}
+{% include 'dbloc/macros/floor_nav.html' with plan=plan %}
 
-{% include 'loc/macros/plan_component.html' with plan=plan teleports=teleports zoom=True tp_action=tp_action %}
+{% include 'dbloc/macros/plan_component.html' with plan=plan teleports=teleports zoom=True tp_action=tp_action %}
 
 <p>
   To set the coordinates (x and y) of the teleport, please double-click on the
@@ -21,7 +21,7 @@
   {{ form | crispy }}
 
   <button class="btn btn-primary" type="Submit">Save</button>
-  <a class="btn btn-secondary" href="{% url 'loc:plan' plan.id %}">Cancel</a>
+  <a class="btn btn-secondary" href="{% url 'dbloc:plan' plan.id %}">Cancel</a>
 </form>
 
 <script type="text/javascript">

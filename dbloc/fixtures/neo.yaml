@@ -1,22 +1,22 @@
-- model: loc.Plan
+- model: dbloc.Plan
   pk: 1
   fields:
     name: Fertighauspark Wuppertal
 
-- model: loc.Plan
+- model: dbloc.Plan
   pk: 2
   fields:
     parent: 1
     name: Fingerhaus Neo 312
 
-- model: loc.Plan
+- model: dbloc.Plan
   pk: 3
   fields:
     parent: 2
     name: Erdgeschoss
     level: 0
 
-- model: loc.Plan
+- model: dbloc.Plan
   pk: 4
   fields:
     parent: 2

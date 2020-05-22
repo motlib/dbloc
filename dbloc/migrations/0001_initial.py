@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, default='', max_length=2000)),
                 ('address', models.TextField(blank=True, default='', max_length=1000)),
                 ('url', models.CharField(blank=True, default='', max_length=1000)),
-                ('parent', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='loc.Plan')),
+                ('parent', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dbloc.Plan')),
             ],
             options={
                 'ordering': ('level',),
@@ -35,8 +35,8 @@ class Migration(migrations.Migration):
                 ('x', models.FloatField(default=0.0)),
                 ('y', models.FloatField(default=0.0)),
                 ('text', models.CharField(default='', max_length=200)),
-                ('dest', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='loc.Plan')),
-                ('src', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='teleports', to='loc.Plan')),
+                ('dest', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='dbloc.Plan')),
+                ('src', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='teleports', to='dbloc.Plan')),
             ],
             options={
                 'ordering': ('text',),

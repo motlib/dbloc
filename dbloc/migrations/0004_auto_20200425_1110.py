@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('loc', '0003_auto_20200424_1958'),
+        ('dbloc', '0003_auto_20200424_1958'),
     ]
 
     operations = [

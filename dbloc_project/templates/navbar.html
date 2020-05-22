@@ -1,6 +1,6 @@
 {# main navigation bar fragment #}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" href="{% url 'loc:index' %}">dbloc</a>
+  <a class="navbar-brand" href="{% url 'dbloc:index' %}">dbloc</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarsExample03" aria-controls="navbarsExample03"
@@ -24,11 +24,11 @@
       </li>
       {% endif %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'loc:info' %}">Info</a>
+        <a class="nav-link" href="{% url 'dbloc:info' %}">Info</a>
       </li>
     </ul>
 
-    <form class="form-inline my-2 my-md-0" method="GET" action="{% url 'loc:search' %}">
+    <form class="form-inline my-2 my-md-0" method="GET" action="{% url 'dbloc:search' %}">
       <input class="form-control" type="text" name="term" placeholder="Search">
     </form>
   </div>

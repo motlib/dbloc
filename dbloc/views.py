@@ -40,7 +40,7 @@ class PlanDetailView(DetailView):
         context['parent'] = plan.parent
         context['sub_plans'] = plan.sub_plans
         context['teleports'] = plan.teleports.all()
-        context['tp_action'] = 'loc:tp_follow'
+        context['tp_action'] = 'dbloc:tp_follow'
 
         return context
 
@@ -50,7 +50,7 @@ class PlanMetaEdit(LoginRequiredMixin, UpdateView):
 
     model = Plan
     fields = ['address', 'description', 'url']
-    template_name = 'loc/plan_edit_meta.html'
+    template_name = 'dbloc/plan_edit_meta.html'
 
 
 @login_required
@@ -66,7 +66,7 @@ def plan_add_teleport(request, pk):
             teleport.src = plan
             teleport.save()
 
-            return redirect('loc:plan', pk=plan.id)
+            return redirect('dbloc:plan', pk=plan.id)
     else:
         form = PlanTeleportForm()
 
@@ -75,7 +75,7 @@ def plan_add_teleport(request, pk):
         'form': form,
     }
 
-    return render(request, 'loc/plan_edit_teleport.html', context)
+    return render(request, 'dbloc/plan_edit_teleport.html', context)
 
 
 def search(request):
@@ -89,7 +89,7 @@ def search(request):
         'title': "Search result: '{0}'".format(term)
     }
 
-    return render(request, 'loc/plan_list.html', context)
+    return render(request, 'dbloc/plan_list.html', context)
 
 
 def info(request):
@@ -99,7 +99,7 @@ def info(request):
         'info': versioninfo,
     }
 
-    return render(request, 'loc/info.html', context)
+    return render(request, 'dbloc/info.html', context)
 
 
 # select tp -> edit tp
@@ -117,7 +117,7 @@ def plan_select_tp(request, pk, tp_action):
         'teleports': plan.teleports.all(),
     }
 
-    return render(request, 'loc/plan_detail.html', context)
+    return render(request, 'dbloc/plan_detail.html', context)
 
 
 def tp_edit(request, pk):
@@ -130,7 +130,7 @@ def tp_edit(request, pk):
         if form.is_valid():
             form.save()
 
-            return redirect('loc:plan', pk=teleport.src.id)
+            return redirect('dbloc:plan', pk=teleport.src.id)
     else:
         form = PlanTeleportForm(instance=teleport)
 
@@ -141,7 +141,7 @@ def tp_edit(request, pk):
         'form': form,
     }
 
-    return render(request, 'loc/plan_edit_teleport.html', context)
+    return render(request, 'dbloc/plan_edit_teleport.html', context)
 
 
 def tp_follow(request, pk):
@@ -149,7 +149,7 @@ def tp_follow(request, pk):
 
     teleport = get_object_or_404(Teleport, pk=pk)
 
-    return redirect('loc:plan', pk=teleport.dest.id)
+    return redirect('dbloc:plan', pk=teleport.dest.id)
 
 
 @login_required
@@ -162,9 +162,9 @@ def tp_delete(request, pk):
         plan = tp.src
         tp.delete()
 
-        return redirect('loc:plan', pk=plan.id)
+        return redirect('dbloc:plan', pk=plan.id)
     else:
         context = {
             'tp': tp
         }
-        return render(request, 'loc/teleport_confirm_delete.html', context)
+        return render(request, 'dbloc/teleport_confirm_delete.html', context)

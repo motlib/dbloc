@@ -6,4 +6,4 @@ from django.apps import AppConfig
 class LocConfig(AppConfig):
     '''Application configuration for the `loc` app.'''
 
-    name = 'loc'
+    name = 'dbloc'

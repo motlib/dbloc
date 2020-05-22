@@ -13,6 +13,8 @@
 
 -   Style for plan teleport links
 
+-   Show edit metadata link only when logged in
+
 ## Quality
 
 -   Add / configure django logging

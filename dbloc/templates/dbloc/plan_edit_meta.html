@@ -10,7 +10,7 @@
   {{ form|crispy }}
 
   <button class="btn btn-primary" type="submit" value="Save">Save</button>
-  <a class="btn btn-secondary" href="{% url 'loc:plan' plan.id %}">Cancel</a>
+  <a class="btn btn-secondary" href="{% url 'dbloc:plan' plan.id %}">Cancel</a>
 </form>
 
 {% endblock %}
