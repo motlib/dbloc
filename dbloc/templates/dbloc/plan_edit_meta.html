@@ -5,7 +5,9 @@
 {% block title %}Edit Metadata{% endblock %}
 
 {% block content %}
+{% if plan %}
 {% include 'dbloc/macros/plan_info.html' with plan=plan %}
+{% endif %}
 
 <form method="post">
   {% include 'dbloc/macros/form_errors.html' with form=form %}
@@ -37,7 +39,11 @@
   </div>
 
   <button class="btn btn-primary" type="submit" value="Save">Save</button>
+  {% if plan %}
   <a class="btn btn-secondary" href="{% url 'dbloc:plan' plan.id %}">Cancel</a>
+  {% else %}
+  <a class="btn btn-secondary" href="{% url 'dbloc:index' %}">Cancel</a>
+  {% endif %}
 </form>
 
 {% endblock %}

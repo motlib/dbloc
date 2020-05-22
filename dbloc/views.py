@@ -1,9 +1,10 @@
 '''Views for the `loc` app'''
 
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, \
+    DeleteView
 
 from django.forms import inlineformset_factory
 
@@ -55,6 +56,41 @@ class PlanEditView(LoginRequiredMixin, UpdateView):
     template_name = 'dbloc/plan_edit_meta.html'
     context_object_name = 'plan'
 
+
+class PlanCreateView(LoginRequiredMixin, CreateView):
+    '''Create a new top-level plan (i.e. with parent set to null).'''
+    model = Plan
+    form_class = PlanMetaForm
+    template_name = 'dbloc/plan_edit_meta.html'
+
+
+
+def plan_delete(request, pk):
+    '''Delete a plan. If the plan has sub-plans, reject deleting it.'''
+
+    plan = get_object_or_404(Plan, pk=pk)
+
+    if request.method == 'POST':
+        parent = plan.parent
+        plan.delete()
+
+        if parent is not None:
+            return redirect('dbloc:plan', parent.id)
+        else:
+            return redirect('dbloc:index')
+
+    else:
+        sub_plans = plan.sub_plans
+
+        context = {
+            'plan': plan,
+            'subplans': sub_plans,
+        }
+
+        if len(sub_plans) > 0:
+            return render(request, 'dbloc/plan_reject_delete.html', context)
+        else:
+            return render(request, 'dbloc/plan_confirm_delete.html', context)
 
 
 def plan_edit_subplans(request, pk):

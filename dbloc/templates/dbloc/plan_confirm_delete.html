@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Plan{% endblock %}
+
+{% block content %}
+{% include 'dbloc/macros/plan_info.html' with plan=plan %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <p>
+    Are you sure you want to delete the plan "{{ plan }}"?
+  </p>
+
+  <button class="btn btn-primary" type="submit">Confirm</button>
+  <a class="btn btn-secondary" href="{% url 'dbloc:plan' plan.id %}">Cancel</a>
+</form>
+
+{% endblock %}

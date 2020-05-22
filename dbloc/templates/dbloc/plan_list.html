@@ -6,4 +6,11 @@
 {% include 'dbloc/macros/planlist.html' with plans=plans %}
 
 {% include 'pagination.html' with page_obj=page_obj %}
+
+{% if user.is_authenticated %}
+<p>
+  <strong>Actions: </strong>
+  <a href="{% url 'dbloc:plan_new' %}">Add Plan</a>
+</p>
+{% endif %}
 {% endblock %}

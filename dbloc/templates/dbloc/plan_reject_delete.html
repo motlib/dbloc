@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Plan{% endblock %}
+
+{% block content %}
+{% include 'dbloc/macros/plan_info.html' with plan=plan %}
+
+<p>
+  You cannot delete the selected plan {{ plan }}, because it still has sub-plans
+  attached. Please first delete all sub-plans.
+</p>
+
+<p>
+  <a class="btn btn-secondary" href="{% url 'dbloc:plan' plan.id %}">Cancel</a>
+</p>
+{% endblock %}

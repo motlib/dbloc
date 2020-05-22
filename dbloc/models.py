@@ -12,7 +12,7 @@ class Plan(models.Model):
     name = models.CharField(default='', max_length=200)
     image = models.ImageField(null=True, blank=True)
 
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    parent = models.ForeignKey('self', on_delete=models.PROTECT, null=True, blank=True)
     level = models.IntegerField(null=True, blank=True)
 
     description = models.TextField(default='', max_length=2000, blank=True)

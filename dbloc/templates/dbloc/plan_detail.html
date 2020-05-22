@@ -56,6 +56,7 @@
   <strong>Actions:</strong>
   <a href="{% url 'dbloc:plan_edit' plan.id %}">Edit Plan</a>
   <a href="{% url 'dbloc:plan_edit_subplans' plan.id %}">Edit Subplans</a>
+  <a href="{% url 'dbloc:plan_delete' plan.id %}">Delete Plan</a>
   {% if plan.image %}
   <a href="{% url 'dbloc:plan_add_tp' plan.id %}">Add Teleport</a>
   <a href="{% url 'dbloc:plan_select_tp' plan.id 'dbloc:tp_edit' %}">Edit Teleport</a>
