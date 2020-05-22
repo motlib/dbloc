@@ -4,8 +4,6 @@
 
 -   Improve page to edit teleport
 
--   Add page to delete teleport
-
 -   Make plan display page universal for showing plan, selecting teleport,
     showing single (selected) teleport
 
@@ -13,7 +11,7 @@
 
 -   Style for plan teleport links
 
--   Show edit metadata link only when logged in
+-   Add user profile page
 
 ## Quality
 
@@ -24,4 +22,4 @@
 
 ## DevOps
 
--   Target to reploy docker to a-netz.de and run there
+-   Target to deploy docker to a-netz.de and run there

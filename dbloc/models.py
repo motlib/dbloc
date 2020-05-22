@@ -55,8 +55,8 @@ class Plan(models.Model):
         return Plan.objects\
             .filter(
                 parent=self.parent,
-                level__lt=self.level)\
-            .order_by('level')\
+                level__gt=self.level)\
+            .order_by('-level')\
             .first()
 
 

@@ -1,18 +1,18 @@
-<div id="building_nav">
-  <p>
+<nav aria-label="Floor navigation">
+  Floors: <ul class="pagination">
     {% if plan.lower_floor %}
-    Down:
-    <span class="floor">
-      <a href="{% url 'dbloc:plan' plan.lower_floor.id %}">{{ plan.lower_floor }}</a>
-    </span>
+    <li class="page-item">
+      <a class="page-link"
+         href="{% url 'dbloc:plan' plan.lower_floor.id %}"
+         title="{{ plan.lower_floor }}">Down</a>
+    </li>
     {% endif %}
-  </p>
-  <p>
     {% if plan.upper_floor %}
-    Up:
-    <span class="floor">
-      <a href="{% url 'dbloc:plan' plan.upper_floor.id %}">{{ plan.upper_floor }}</a>
-    </span>
+    <li class="page-item">
+      <a class="page-link"
+         href="{% url 'dbloc:plan' plan.upper_floor.id %}"
+         title="{{ plan.upper_floor }}">Up</a>
+    </li>
     {% endif %}
-  </p>
-</div>
+  </ul>
+</nav>

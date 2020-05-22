@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, UpdateView
 
 from dbloc_project import versioninfo
 from .models import Plan, Teleport
-from .forms import PlanTeleportForm
+from .forms import PlanTeleportForm, PlanMetaForm
 
 
 class PlanIndexView(ListView):
@@ -49,7 +49,8 @@ class PlanMetaEdit(LoginRequiredMixin, UpdateView):
     '''Edit the metadata of a plan.'''
 
     model = Plan
-    fields = ['address', 'description', 'url']
+    form_class = PlanMetaForm
+    #fields = ['address', 'description', 'url']
     template_name = 'dbloc/plan_edit_meta.html'
     context_object_name = 'plan'
 

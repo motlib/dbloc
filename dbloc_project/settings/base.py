@@ -137,8 +137,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Authentication and Login / Logout
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'loc:index'
-LOGOUT_REDIRECT_URL = 'loc:index'
+LOGIN_REDIRECT_URL = 'dbloc:index'
+LOGOUT_REDIRECT_URL = 'dbloc:index'
 
 # Select the template pack (framework) for crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
