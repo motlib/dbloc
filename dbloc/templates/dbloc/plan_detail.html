@@ -51,17 +51,16 @@
 {% include 'dbloc/macros/planlist.html' with plans=sub_plans %}
 {% endif %}
 
-<p><b>Actions</b></p>
+{% if user.is_authenticated %}
 <p>
-  {% if user.is_authenticated %}
+  <strong>Actions:</strong>
   <a href="{% url 'dbloc:plan_edit' plan.id %}">Edit Plan</a>
   <a href="{% url 'dbloc:plan_edit_subplans' plan.id %}">Edit Subplans</a>
-  {% endif %}
   {% if plan.image %}
   <a href="{% url 'dbloc:plan_add_tp' plan.id %}">Add Teleport</a>
   <a href="{% url 'dbloc:plan_select_tp' plan.id 'dbloc:tp_edit' %}">Edit Teleport</a>
   <a href="{% url 'dbloc:plan_select_tp' plan.id 'dbloc:tp_delete' %}">Delete Teleport</a>
   {% endif %}
 </p>
-
+{% endif %}
 {% endblock %}

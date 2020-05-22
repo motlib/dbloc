@@ -81,6 +81,24 @@ class Plan(models.Model):
         return reverse('dbloc:plan', args=[self.id])
 
 
+    def get_root_path(self):
+        if hasattr(self, '_root_path'):
+            return self._root_path
+
+        '''Returns a list of plans from the top level plan to this plan'''
+        plans = [self]
+        plan = self
+        while plan.parent is not None:
+            plan = plan.parent
+            plans.append(plan)
+
+        plans.reverse()
+
+        self._root_path = plans
+
+        return plans
+
+
 def validate_coord(value):
     '''Validate that coordinate values are in range from 0.0 to 1.0.'''
 

@@ -1,10 +1,10 @@
 {# short information / description of a plan #}
-<p>
-  Plan <a href="{% url 'dbloc:plan' plan.id %}">{{ plan.name }}</a>
-  {% if plan.level is not none %}
-  on level {{plan.level}}
-  {% endif %}
-  {% if plan.parent %}
-  of <a href="{% url 'dbloc:plan' plan.parent.id %}">{{ plan.parent }}</a>
-  {% endif %}
-</p>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'dbloc:index' %}">Home</a></li>
+    {% for p in plan.get_root_path %}
+    <li class="breadcrumb-item"><a href="{% url 'dbloc:plan' p.id %}">{{p.name}}</a></li>
+    {% endfor %}
+  </ol>
+</nav>
