@@ -34,16 +34,16 @@ docker_run: docker
 
 .PHONY: docker_publish
 docker_publish: docker
-	if [ -z "$DOCKER_USER" ]; then echo "DOCKER_USER not set."; exit 1; fi; \
-	if [ -z "$DOCKER_PASS" ]; then echo "DOCKER_PASS not set."; exit 1; fi; \
+	if [ -z "$${DOCKER_USER}" ]; then echo "DOCKER_USER not set."; exit 1; fi; \
+	if [ -z "$${DOCKER_PASS}" ]; then echo "DOCKER_PASS not set."; exit 1; fi; \
 	\
 	export REPO=motlib/dbloc; \
-	export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`; \
-	docker login -u $DOCKER_USER -p $DOCKER_PASS; \
-	docker build -f Dockerfile -t $REPO:$COMMIT .; \
-	docker tag $REPO:$COMMIT $REPO:$TAG; \
-	docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER; \
-	docker push $REPO;
+	export TAG=`if [ "$${TRAVIS_BRANCH}" == "master" ]; then echo "latest"; else echo $${TRAVIS_BRANCH} ; fi`; \
+	docker login -u $${DOCKER_USER} -p $${DOCKER_PASS}; \
+	docker build -f Dockerfile -t $${REPO}:$${COMMIT} .; \
+	docker tag $${REPO}:$${COMMIT} $${REPO}:$${TAG}; \
+	docker tag $${REPO}:$${COMMIT} $${REPO}:travis-$${TRAVIS_BUILD_NUMBER}; \
+	docker push $${REPO};
 
 # Run pylint to check source code
 lint:
