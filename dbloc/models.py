@@ -21,9 +21,9 @@ class Plan(models.Model):
 
     class Meta:
         ordering = ('level',)
-        constraints = [
-            models.UniqueConstraint(fields=['parent', 'level'], name='unique_level')
-        ]
+        #constraints = [
+        #    models.UniqueConstraint(fields=['parent', 'level'], name='unique_level')
+        #]
 
 
     @property

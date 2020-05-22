@@ -100,8 +100,9 @@ def plan_edit_subplans(request, pk):
         parent_model=Plan,
         model=Plan,
         fk_name='parent',
-        fields=['name', 'level'],
-        extra=1)
+        fields=['id', 'name', 'level'],
+        extra=1,
+        can_delete=False)
 
     if request.method == "POST":
         formset = PlanFormSet(request.POST, instance=plan)
