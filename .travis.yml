@@ -7,4 +7,4 @@ services:
   - docker
 
 script:
-  - make docker
+  - make docker_publish
