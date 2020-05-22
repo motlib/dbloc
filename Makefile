@@ -17,7 +17,7 @@ docker:
 
 	docker build --tag dbloc .
 
-	git checkout dbloc/versioninfo.py
+	git checkout dbloc_project/versioninfo.py
 
 
 # Build and run the docker image
