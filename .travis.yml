@@ -1,0 +1,10 @@
+dist: bionic
+
+language: python
+
+
+services:
+  - docker
+
+script:
+  - make docker
