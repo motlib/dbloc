@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, UpdateView
 
 from dbloc_project import versioninfo
 from .models import Plan, Teleport
-from .forms import PlanMetaForm, PlanTeleportForm
+from .forms import PlanTeleportForm
 
 
 class PlanIndexView(ListView):
@@ -51,6 +51,16 @@ class PlanMetaEdit(LoginRequiredMixin, UpdateView):
     model = Plan
     fields = ['address', 'description', 'url']
     template_name = 'dbloc/plan_edit_meta.html'
+    context_object_name = 'plan'
+
+
+class PlanEditImage(LoginRequiredMixin, UpdateView):
+    '''Edit (upload) the image of a plan.'''
+
+    model = Plan
+    fields = ['image']
+    template_name = 'dbloc/plan_edit_image.html'
+    context_object_name = 'plan'
 
 
 @login_required

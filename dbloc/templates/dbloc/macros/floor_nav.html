@@ -3,7 +3,7 @@
     {% if plan.lower_floor %}
     Down:
     <span class="floor">
-      <a href="{% url 'loc:plan' plan.lower_floor.id %}">{{ plan.lower_floor }}</a>
+      <a href="{% url 'dbloc:plan' plan.lower_floor.id %}">{{ plan.lower_floor }}</a>
     </span>
     {% endif %}
   </p>
@@ -11,7 +11,7 @@
     {% if plan.upper_floor %}
     Up:
     <span class="floor">
-      <a href="{% url 'loc:plan' plan.upper_floor.id %}">{{ plan.upper_floor }}</a>
+      <a href="{% url 'dbloc:plan' plan.upper_floor.id %}">{{ plan.upper_floor }}</a>
     </span>
     {% endif %}
   </p>

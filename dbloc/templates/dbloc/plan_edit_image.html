@@ -2,12 +2,12 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %}Edit Metadata{% endblock %}
+{% block title %}Change Image{% endblock %}
 
 {% block content %}
 {% include 'dbloc/macros/plan_info.html' with plan=plan %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form|crispy }}
 

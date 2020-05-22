@@ -4,15 +4,7 @@
 
 {% block content %}
 
-<p>
-  Plan <i>{{ plan.name }}</i>
-  {% if plan.level is not none %}
-  on level {{plan.level}}
-  {% endif %}
-  {% if plan.parent %}
-  of <a href="{% url 'dbloc:plan' plan.parent.id %}">{{ plan.parent }}</a>
-  {% endif %}
-</p>
+{% include 'dbloc/macros/plan_info.html' with plan=plan %}
 
 {% include 'dbloc/macros/floor_nav.html' with plan=plan %}
 {% include 'dbloc/macros/plan_component.html' with plan=plan teleports=teleports zoom=True tp_action=tp_action %}
@@ -32,6 +24,7 @@
 <p><b>Actions</b></p>
 <p>
   <a href="{% url 'dbloc:plan_edit_meta' plan.id %}">Edit Metadata</a>
+  <a href="{% url 'dbloc:plan_edit_image' plan.id %}">Change Image</a>
   {% if plan.image %}
   <a href="{% url 'dbloc:plan_add_tp' plan.id %}">Add Teleport</a>
   <a href="{% url 'dbloc:plan_select_tp' plan.id 'dbloc:tp_edit' %}">Edit Teleport</a>

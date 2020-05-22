@@ -74,8 +74,11 @@ class Plan(models.Model):
 
         return str(self.level)
 
+
     def get_absolute_url(self):
-        return reverse('loc:plan', args=[self.id])
+        '''Get the URL of a Plan instance.'''
+
+        return reverse('dbloc:plan', args=[self.id])
 
 
 def validate_coord(value):

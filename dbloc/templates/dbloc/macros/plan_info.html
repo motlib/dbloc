@@ -1,0 +1,10 @@
+{# short information / description of a plan #}
+<p>
+  Plan <a href="{% url 'dbloc:plan' plan.id %}">{{ plan.name }}</a>
+  {% if plan.level is not none %}
+  on level {{plan.level}}
+  {% endif %}
+  {% if plan.parent %}
+  of <a href="{% url 'dbloc:plan' plan.parent.id %}">{{ plan.parent }}</a>
+  {% endif %}
+</p>
