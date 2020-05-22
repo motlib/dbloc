@@ -2,7 +2,7 @@
 
 from django.core.exceptions import ValidationError
 from django.urls import reverse
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
 
 
@@ -10,6 +10,8 @@ class Plan(models.Model):
     '''Model of a plan'''
 
     name = models.CharField(default='', max_length=200)
+    full_name = models.CharField(default='', max_length=2000)
+
     image = models.ImageField(null=True, blank=True)
 
     parent = models.ForeignKey('self', on_delete=models.PROTECT, null=True, blank=True)
@@ -19,11 +21,9 @@ class Plan(models.Model):
     address = models.TextField(default='', max_length=1000, blank=True)
     url = models.URLField(default='', max_length=1000, blank=True)
 
+
     class Meta:
-        ordering = ('level',)
-        #constraints = [
-        #    models.UniqueConstraint(fields=['parent', 'level'], name='unique_level')
-        #]
+        ordering = ('name',)
 
 
     @property
@@ -69,10 +69,7 @@ class Plan(models.Model):
 
 
     def __str__(self):
-        if self.name:
-            return self.name
-
-        return str(self.level)
+        return self.full_name
 
 
     def get_absolute_url(self):
@@ -82,12 +79,16 @@ class Plan(models.Model):
 
 
     def get_root_path(self):
+        '''Returns a list of plans from the top level plan to this plan.
+
+        Was used for calculating the full_name attribute.'''
+
         if hasattr(self, '_root_path'):
             return self._root_path
 
-        '''Returns a list of plans from the top level plan to this plan'''
         plans = [self]
         plan = self
+
         while plan.parent is not None:
             plan = plan.parent
             plans.append(plan)
@@ -97,6 +98,23 @@ class Plan(models.Model):
         self._root_path = plans
 
         return plans
+
+
+    def save(self, *args, **kwargs):
+        '''Override the save method of the base class to calculate the full_name
+        attribute.'''
+
+        parent_name = (self.parent.full_name + ' / ') if self.parent else ''
+        full_name = parent_name + self.name
+        self.full_name = full_name[0:2000]
+
+        # wrapped in a transaction to update all subplans at once
+        with transaction.atomic():
+            super().save(*args, **kwargs)
+
+            for p in self.sub_plans:
+                # this triggers calculation of full_name in sub_plans
+                p.save()
 
 
 def validate_coord(value):

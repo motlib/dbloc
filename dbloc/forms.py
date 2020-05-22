@@ -32,8 +32,6 @@ class PlanForm(forms.ModelForm):
         }
 
 
-
-
 class PlanTeleportForm(forms.ModelForm):
     '''Form to edit a teleport.'''
 
@@ -52,6 +50,17 @@ class PlanTeleportForm(forms.ModelForm):
             'dest': 'Teleport Destination',
             'text': 'Teleport Label',
         }
+
+
+    def __init__(self, *args, **kwargs):
+        '''Override init of base class to provide custom sorting for dest choice
+        field.'''
+
+        super().__init__(*args, **kwargs)
+
+        self.fields['dest'].queryset = \
+            self.fields['dest'].queryset.order_by('full_name')
+
 
 class TeleportDeleteForm(forms.ModelForm):
     '''Form to delete a teleport.'''
