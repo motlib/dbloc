@@ -1,0 +1,12 @@
+version: '3'
+services:
+  dbloc:
+    container_name: dbloc
+    image: motlib/dbloc:travis_ci
+
+    ports:
+      - "8000:80"
+
+    volumes:
+      - ./media:/usr/src/app/media
+      - ./db.sqlite3:/usr/src/app/db.sqlite3
