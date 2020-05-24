@@ -1,6 +1,13 @@
 
 SHELL=/bin/bash
 
+# name of the docker repository
+DOCKER_REPO=motlib/dbloc
+
+# has of the last git commit
+GIT_COMMIT=$(shell git rev-parse HEAD)
+
+
 # Remove and create a new virtualenv with all dependencies installed.
 .PHONY: setup
 setup:
@@ -22,28 +29,34 @@ endif
 docker:
 	tools/update-version.sh
 
-	docker build --build-arg CN_MIRROR=${CN_MIRROR} --tag dbloc .
+	docker build --build-arg CN_MIRROR=${CN_MIRROR} --tag $(DOCKER_REPO):$(GIT_COMMIT) .
 
 	git checkout dbloc_project/versioninfo.py
+
+	echo -e "\nINFO: Created docker image $(DOCKER_REPO):$(GIT_COMMIT).\n"
 
 
 # Build and run the docker image
 .PHONY: docker_run
 docker_run: docker
-	docker run --rm --name dbloc -p 8000:80 dbloc
+	docker run --rm --name dbloc -p 8000:80 $(DOCKER_REPO):$(GIT_COMMIT)
 
+
+# publish the docker image to docker hub. This is intended to be run as a
+# TravisCI job
 .PHONY: docker_publish
 docker_publish: docker
-	if [ -z "$${DOCKER_USER}" ]; then echo "DOCKER_USER not set."; exit 1; fi; \
-	if [ -z "$${DOCKER_PASS}" ]; then echo "DOCKER_PASS not set."; exit 1; fi; \
-	\
-	export REPO=motlib/dbloc; \
+	if [ -z "$${TRAVIS_BUILD_NUMBER}" ]; then echo "ERROR: Please only run as TravisCI job."; exit 1; fi
+
+	if [ -z "$${DOCKER_USER}" ]; then echo "ERROR: DOCKER_USER not set."; exit 1; fi;
+	if [ -z "$${DOCKER_PASS}" ]; then echo "ERROR: DOCKER_PASS not set."; exit 1; fi;
+
 	export TAG=`if [ "$${TRAVIS_BRANCH}" == "master" ]; then echo "latest"; else echo $${TRAVIS_BRANCH} ; fi`; \
 	docker login -u $${DOCKER_USER} -p $${DOCKER_PASS}; \
-	docker build -f Dockerfile -t $${REPO}:$${TRAVIS_COMMIT} .; \
-	docker tag $${REPO}:$${TRAVIS_COMMIT} $${REPO}:$${TAG}; \
-	docker tag $${REPO}:$${TRAVIS_COMMIT} $${REPO}:travis-$${TRAVIS_BUILD_NUMBER}; \
-	docker push $${REPO};
+	docker tag $(DOCKER_REPO):$(GIT_COMMIT) $(DOCKER_REPO):$${TAG}; \
+	docker tag $(DOCKER_REPO):$(GIT_COMMIT) $(DOCKER_REPO):travis-$${TRAVIS_BUILD_NUMBER}; \
+	docker push $(DOCKER_REPO);
+
 
 # Run pylint to check source code
 lint:
