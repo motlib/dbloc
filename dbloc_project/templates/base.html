@@ -16,6 +16,8 @@
 
   <body>
     {% include 'navbar.html' %}
+    <small>{% block title %}{% endblock %}</small>
+
 
     <main id="content" class="container mt-5" role="main">
       {% block content %}{% endblock %}

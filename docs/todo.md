@@ -13,6 +13,9 @@
 
 -   Add user profile page
 
+-   Help texts for edit plan form
+
+
 ## Quality
 
 -   Add / configure django logging
