@@ -1,7 +1,7 @@
 '''Version and related information'''
 
 # Application version
-VERSION = '0.0dev'
+VERSION = '0.1'
 
 # Git information
 GIT_HASH = 'undefined'
