@@ -4,7 +4,7 @@
 
 
 {% block content %}
-<h2>Application Version Information</h2>
+<h2>Version Information</h2>
 
 <div class="row mt-4">
   <table class="table table-hover col-6">
@@ -24,9 +24,28 @@
       <th scope="row">Build Date</th>
       <td>{{ info.BUILD_DATE }}</td>
     </tr>
-    <tr scope="row">
+    <!--<tr scope="row">
       <th>Build Host</th>
     <td>{{ info.BUILD_HOST }}</td>
+    </tr>-->
+  </table>
+</div>
+
+<h2>Application Information</h2>
+
+<div class="row mt-4">
+  <table class="table table-hover col-6">
+    <tr>
+      <th scope="row">Developed by</th>
+      <td>Andreas Schröder &lt;<a href="mailto:andreas@a-netz.de">andreas@a-netz.de</a>&gt;</td>
+    </tr>
+    <tr>
+      <th scope="row">Source Code</th>
+      <td><a href="https://github.com/motlib/dbloc">https://github.com/motlib/dbloc</a></td>
+    </tr>
+    <tr>
+      <th scope="row">License</th>
+      <td><a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3</a></td>
     </tr>
   </table>
 </div>
