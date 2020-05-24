@@ -4,9 +4,16 @@ SHELL=/bin/bash
 # name of the docker repository
 DOCKER_REPO=motlib/dbloc
 
-# has of the last git commit
+# current branch and hash of the last git commit
 GIT_COMMIT=$(shell git rev-parse HEAD)
+GIT_BRANCH=$(shell git branch --show-current)
 
+# if we build the master branch, it's a release. Otherwise it's a test
+ifeq ($(GIT_BRANCH),master)
+  DOCKER_TAG=latest
+else
+  DOCKER_TAG=testing
+endif
 
 # Remove and create a new virtualenv with all dependencies installed.
 .PHONY: setup
@@ -29,33 +36,36 @@ endif
 docker:
 	tools/update-version.sh
 
-	docker build --build-arg CN_MIRROR=${CN_MIRROR} --tag $(DOCKER_REPO):$(GIT_COMMIT) .
+	docker build --build-arg CN_MIRROR=${CN_MIRROR} --tag $(DOCKER_REPO):$(DOCKER_TAG) .
 
 	git checkout dbloc_project/versioninfo.py
 
-	echo -e "\nINFO: Created docker image $(DOCKER_REPO):$(GIT_COMMIT).\n"
+	echo -e "\nINFO: Created docker image '$(DOCKER_REPO):$(DOCKER_TAG)'.\n"
 
 
 # Build and run the docker image
 .PHONY: docker_run
 docker_run: docker
-	docker run --rm --name dbloc -p 8000:80 $(DOCKER_REPO):$(GIT_COMMIT)
+	docker run --rm --name dbloc -p 8000:80 $(DOCKER_REPO):$(DOCKER_TAG)
 
 
 # publish the docker image to docker hub. This is intended to be run as a
 # TravisCI job
 .PHONY: docker_publish
 docker_publish: docker
-	if [ -z "$${TRAVIS_BUILD_NUMBER}" ]; then echo "ERROR: Please only run as TravisCI job."; exit 1; fi
+	[ -z "$${TRAVIS_BUILD_NUMBER}" ] \
+	  && ( echo "ERROR: Please only run as TravisCI job."; exit 1; )
 
-	if [ -z "$${DOCKER_USER}" ]; then echo "ERROR: DOCKER_USER not set."; exit 1; fi;
-	if [ -z "$${DOCKER_PASS}" ]; then echo "ERROR: DOCKER_PASS not set."; exit 1; fi;
+	[ -z "$${DOCKER_USER}" ] \
+	  && ( echo "ERROR: DOCKER_USER not set."; exit 1; )
+	[ -z "$${DOCKER_PASS}" ] \
+	  && ( echo "ERROR: DOCKER_PASS not set."; exit 1; )
 
-	export TAG=`if [ "$${TRAVIS_BRANCH}" == "master" ]; then echo "latest"; else echo $${TRAVIS_BRANCH} ; fi`; \
-	docker login -u $${DOCKER_USER} -p $${DOCKER_PASS}; \
-	docker tag $(DOCKER_REPO):$(GIT_COMMIT) $(DOCKER_REPO):$${TAG}; \
-	docker tag $(DOCKER_REPO):$(GIT_COMMIT) $(DOCKER_REPO):travis-$${TRAVIS_BUILD_NUMBER}; \
-	docker push $(DOCKER_REPO);
+	echo $${DOCKER_PASS} | docker login --username $${DOCKER_USER} --password-stdin; \
+	docker push $(DOCKER_REPO); \
+	docker logout
+
+	echo -e "\nINFO: Pushed docker image '$(DOCKER_REPO):$(DOCKER_TAG)'.\n"
 
 
 # Run pylint to check source code
