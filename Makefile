@@ -53,13 +53,13 @@ docker_run: docker
 # TravisCI job
 .PHONY: docker_publish
 docker_publish: docker
-	[ -z "$${TRAVIS_BUILD_NUMBER}" ] \
-	  && ( echo "ERROR: Please only run as TravisCI job."; exit 1; )
+	[ -n "$${TRAVIS_BUILD_NUMBER}" ] \
+	  || ( echo "ERROR: Please only run as TravisCI job."; exit 1; )
 
-	[ -z "$${DOCKER_USER}" ] \
-	  && ( echo "ERROR: DOCKER_USER not set."; exit 1; )
-	[ -z "$${DOCKER_PASS}" ] \
-	  && ( echo "ERROR: DOCKER_PASS not set."; exit 1; )
+	[ -n "$${DOCKER_USER}" ] \
+	  || ( echo "ERROR: DOCKER_USER not set."; exit 1; )
+	[ -n "$${DOCKER_PASS}" ] \
+	  || ( echo "ERROR: DOCKER_PASS not set."; exit 1; )
 
 	echo $${DOCKER_PASS} | docker login --username $${DOCKER_USER} --password-stdin; \
 	docker push $(DOCKER_REPO); \
