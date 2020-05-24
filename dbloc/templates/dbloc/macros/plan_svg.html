@@ -19,4 +19,21 @@
         >{{ teleport.text }}</text>
   </a>
   {% endfor %}
+
+  {% if mark %}
+  <g id="plan_mark">
+    <circle id="plan_mark"
+            cx="{{ mark.x }}"
+            cy="{{ mark.y }}"
+            r="5" />
+
+    <line x1="{{ mark.x|add:-8 }}" y1="{{ mark.y}}"
+          x2="{{ mark.x|add:8 }}" y2="{{ mark.y}}" />
+
+    <line x1="{{ mark.x }}" y1="{{ mark.y|add:-8 }}"
+          x2="{{ mark.x }}" y2="{{ mark.y|add:8 }}" />
+
+    <title>{{ mark.text }}</title>
+  </g>
+  {% endif %}
 </svg>

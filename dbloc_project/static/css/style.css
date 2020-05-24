@@ -1,195 +1,47 @@
+
 /*
- * Color palette: https://www.canva.com/colors/color-palettes/blooms-and-bows/
- *
- * Emerald Green #5f9834
- * Chili Pepper #ff3d33
- * Orchid #e3bee0
- * Orange #fd8300
+ * General styling is done with bootstrap. Additional styles can be defined
+ *  here.
  */
 
+#plan_mark {
+    stroke-width: 3px;
+    stroke: red;
+    stroke-width: 2px;
+    stroke-opacity: 0.8;
+    fill-opacity: 0.0;
 
-#content {
-    padding: 3rem 1.5rem;
- /*   text-align: center;*/
+    animation: flash 0.3s;
+    animation-iteration-count: infinite;
 }
 
-#links {
-    margin-top: 15px;
-    margin-bottom: 15px;
+#plan_mark circle {
+    stroke-width: 3px;
 }
 
-#links span.link {
-    padding: 15px;
+#plan_mark line {
+    stroke-width: 1px;
 }
 
-#search {
-    margin: 10px;
+#plan_mark:hover {
+    animation: off;
+    stroke: var(--success);
 }
 
-ul.planlist {
-    padding-left: 0;
-}
+@keyframes flash {
+    0% {
+        stroke: var(--info);
+    }
 
-ul.planlist li {
-    list-style-type: none;
-    list-style-position: inside;
-    padding: 15px;
-    padding-left: 0;
-    margin: 5px;
-}
+    49.9% {
+        stroke: var(--info);
+    }
 
-ul.planlist li a {
-    padding: 15px;
-    padding-left: 15px;
-    border-left: 3pt solid #5f9834;
-}
+    50% {
+        stroke: var(--warning);
+    }
 
-ul.planlist li a:hover {
-    background-color: #ccc;
-}
-
-
-html {
-    font-size: 10pt;
-}
-
-body {
-    margin-left: 20px;
-    margin-right: 20px;
-    font-family: sans-serif;
-}
-
-h1 {
-    font-size: 1.2rem;
-}
-
-
-#header {
-    background-color: lightgray;
-    padding: 0.3rem;
-}
-
-#header #nav_loc {
-    display: inline-block;
-}
-
-#header #nav_admin {
-    float: right;
-}
-
-#image img {
-    padding: 0.2rem;
-    border: 1px solid lightgray;
-}
-
-.teleport_link {
-    font-size:10px;
-    fill: red;
-    dominant-baseline: middle;
-    text-anchor: middle;
-}
-
-.teleport_link:hover {
-    font-weight: bold;
-}
-
-
-#image {
-    border: 1px solid lightgray;
-    display: inline-block;
-}
-
-#meta {
-    border: 1px solid lightgray;
-
-    display: inline-block;
-    padding: 1rem;
-    //float: left;
-}
-
-#meta .header {
-    font-weight: bold;
-}
-
-#meta .value {
-
-}
-
-
-
-/* Infotable */
-
-.infotable {
-    font-size: small;
-    border-collapse: collapse;
-    border: 1pt solid #ccc;
-}
-
-.infotable th {
-    text-align: left;
-    font-weight: bold;
-}
-
-.infotable tr:hover {
-    background-color: #eee;
-}
-
-.infotable tr th, .infotable tr td {
-    padding: 0.4em;
-}
-
-
-/* Forms */
-
-.form_table {
-    border: 1pt solid #eee;
-    margin: 5px;
-}
-
-.form_table th {
-    font-size: small;
-    font-weight: bold;
-    vertical-align: top;
-    text-align: left;
-}
-
-.errorlist {
-    color: red;
-    font-size: small;
-    margin: 0;
-    padding: 0;
-}
-
-.errorlist li {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-
-/* Buttons */
-input[type=submit], .cancel_button{
-    padding:5px 15px;
-    margin: 3px;
-    background: #5f9834;
-    border: 1px solid #5f9834;
-    color: black;
-    border-radius: 5px;
-    font-size: small;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-input[type=submit]:hover, .cancel_button:hover {
-    color: white;
-}
-
-
-/* Text fields */
-input[type=text], input[type=password], input[type=url], input[type=number], textarea {
-    padding:5px 15px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    color: black;
+    99.9% {
+        stroke: var(--warning);
+    }
 }

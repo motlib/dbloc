@@ -17,7 +17,6 @@ urlpatterns = [
 
     path('plan/new/', views.PlanCreateView.as_view(), name='plan_new'),
 
-
     path('tp/<int:pk>/edit/', views.tp_edit, name='tp_edit'),
     path('tp/<int:pk>/delete/', views.tp_delete, name='tp_delete'),
     path('tp/<int:pk>/follow/', views.tp_follow, name='tp_follow'),

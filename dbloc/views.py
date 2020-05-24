@@ -45,6 +45,13 @@ class PlanDetailView(DetailView):
         context['teleports'] = plan.teleports.all()
         context['tp_action'] = 'dbloc:tp_follow'
 
+        if ('x' in self.request.GET) and ('y' in self.request.GET):
+            x = float(self.request.GET['x']) * plan.image.width
+            y = float(self.request.GET['y']) * plan.image.height
+            text = self.request.GET.get('text', '')
+
+            context['mark'] = {'x': x, 'y': y, 'text': text}
+
         return context
 
 

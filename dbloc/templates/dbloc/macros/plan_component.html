@@ -1,7 +1,7 @@
 {% load static %}
 <div id="image">
   {% if plan.image %}
-  {% include 'dbloc/macros/plan_svg.html' with plan=plan teleports=teleports tp_action=tp_action %}
+  {% include 'dbloc/macros/plan_svg.html' with plan=plan teleports=teleports tp_action=tp_action mark=mark%}
   {% else %}
   No image stored.
   {% endif %}
